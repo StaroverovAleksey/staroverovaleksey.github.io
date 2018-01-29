@@ -223,6 +223,9 @@ img {
     border-width: 0 0 57px 600px;
   }
 }
+.hidden {
+  display: none;
+}
 @media (min-width: 768px) {
   .main-nav__items {
     display: -webkit-box;
