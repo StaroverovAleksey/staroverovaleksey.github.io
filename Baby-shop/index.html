@@ -27,11 +27,15 @@
 		<nav class="main-navigation">
 			<a class="logo">
 				<span class="logo__name">Baby</span>
-				<span class="logo__signature">Logo-sloganLogo-sloganLogo-slogan</span>
-			</a>			<ul class="main-navigation__category-list visually-hidden">
+				<span class="logo__signature">Logo-sloganLogo-sloganLogo</span>
+			</a>			
+			<ul class="main-navigation__category-list visually-hidden">
 				<li class="main-navigation__category-item">
 					<a href="#" class="main-navigation__category-link">Овощи</a>
 					<span class="main-navigation__open-icon"></span>
+					<button class="main-navigation__close-button">
+						<span class="main-navigation__close-paint"></span>
+					</button>
 					<ul class="main-navigation__subcategory-list">
 						<li class="main-navigation__subcategory-item">
 							<a href="#" class="main-navigation__subcategory-link">Помидоры</a>
@@ -227,12 +231,12 @@
 				</li>
 			</ul>
 			<form action="" class="search-form" >
-				<input type="text" class="search-form__input">
+				<input type="text" class="search-form__input hidden">
 				<button class="search-form__button"></button>
 			</form>
-			<div class="main-navigation__button-wrapper">
-				<button class="main-navigation__open-button"></button>	
-			</div>
+			<button class="main-navigation__open-button">
+				<span class="main-navigation__open-paint"></span>
+			</button>
 		</nav>
 	</header>
 	<main class="main-content">
