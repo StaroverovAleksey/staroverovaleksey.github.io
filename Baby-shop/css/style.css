@@ -5,6 +5,18 @@ body {
 	color: black;
 }
 
+.visually-hidden {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+}
+
+.hidden {
+	display: none;
+}
+
 .main-header {
 	max-width: 1920px;
 	margin: 0 auto;
@@ -185,6 +197,10 @@ body {
 	display: block;
 }
 
+.main-navigation__category-item:hover .main-navigation__category-link {
+	color: #e23709;
+}
+
 .main-navigation__category-item {
 	position: relative;
 }
@@ -192,8 +208,8 @@ body {
 .main-navigation__subcategory-list {
 	padding: 0;
 	list-style-type: none;
-	display: none;
 	background: white;
+	display: none;
 }
 
 .main-navigation__subcategory-link {
@@ -205,4 +221,71 @@ body {
 	text-align: center;
 	padding-top: 12px;
 	padding-bottom: 12px;
+}
+
+.main-navigation__subcategory-link:hover {
+	color: #e23709;
+}
+
+.main-navigation__button-wrapper {
+	position: absolute;
+	top: 230px;
+	left: 90%;
+	width: 50px;
+	height: 40px;
+	cursor: pointer;
+}
+
+.main-navigation__open-button {
+	display: block;
+	top: 15px;
+	left: 0;
+	width: 50px;
+	height: 10px;
+	border-radius: 5px;
+	background: red;
+	border: none;
+}
+
+.main-navigation__open-button::before {
+	position: absolute;
+	content: "";
+	top: 15px;
+	left: 0;
+	width: 50px;
+	height:10px;
+	border-radius: 5px;
+	background: red;
+	border: none;
+}
+
+.main-navigation__open-button::after {
+	position: absolute;
+	content: "";
+	top: -15px;
+	left: 0;
+	width: 50px;
+	height: 10px;
+	border-radius: 5px;
+	background: red;
+	border: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+.main-content {
+	max-width: 1920px;
+	margin: 0 auto;
+}
+
+.main0slider__image {
+	width: 100%;
 }

@@ -1,4 +1,9 @@
-/*var logo = document.querySelector('.logo');
+var openMenuButton = document.querySelector('.main-navigation__button-wrapper');
+var menu = document.querySelector('.main-navigation__category-list');
 
-logo.style.left = document.documentElement.clientWidth / 2 - logo.clientWidth + 'px'
-console.dir(document.documentElement.clientWidth);*/
+var openMenu = function(evt) {
+	menu.classList.remove('visually-hidden');
+	openMenuButton.classList.add('hidden');
+};
+
+openMenuButton.addEventListener('click', openMenu);
