@@ -376,8 +376,6 @@ body {
 	text-align: center;
 	padding-bottom: 100px;
 	max-width: 1170px;
-	padding-left: 15px;
-	padding-right: 15px;
 	margin: 0 auto;
 	box-sizing: border-box;
 }
@@ -395,11 +393,15 @@ body {
 
 .category-wrapper {
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-around;
 }
 
 .category-item {
-	width: 30%;
+	flex-basis: 100%;
+	display: block;
+	text-decoration: none;
+	color: black;
+	margin: 0 15px;
 }
 
 .category-item__title {
@@ -745,4 +747,139 @@ body {
 
 .rotate {
 	transform: rotate(180deg);
+}
+
+
+
+
+.category-second {
+	padding-bottom: 0;
+}
+
+
+
+
+.quote {
+	text-align: center;
+}
+
+.quote-title {
+	margin: 0;
+	padding-top: 20px;
+}
+
+.quote-subscribe {
+	margin: 0;
+	padding-top: 0px;
+	padding-bottom: 20px;
+}
+
+.quote-wrapper {
+	display: flex;
+	max-width: 1170px;
+	margin: 0 auto;
+	justify-content: space-around;
+}
+
+.quote-cart {
+	flex-basis: 100%;
+	height: 100%;
+	margin: 0 15px;
+	box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+}
+
+.quote-cart__image-wrapper {
+	width: 30%;
+	border-radius: 50%;
+	margin: 20px auto;
+	overflow: hidden;
+}
+
+.quote-cart__image {
+	display: block;
+}
+
+.quote-cart__name {
+	display: block;
+	padding-bottom: 6px;
+}
+
+.qoute-cart__text {
+	display: block;
+	font-size: 16px;
+	padding: 0 20px;
+}
+
+.quote-cart__icon {
+	display: block;
+	position: relative;
+	width: 50px;
+	height: 39px;
+	margin: 20px auto;
+}
+
+.quote-cart__icon::before {
+	display: block;
+	position: absolute;
+	content: "";
+	width: 100%;
+	height: 100%;
+	background: url(../images/icons/quote.png);
+	background-size: cover;
+}
+
+.blog{
+	text-align: center;
+}
+
+.blog-title {
+	margin: 0;
+	padding-top: 20px;
+}
+
+.blog-subscribe {
+	margin: 0;
+	padding-bottom: 20px;
+}
+
+.blog-wrapper {
+	max-width: 1170px;
+	margin: 0 auto;
+	padding: 0 15px;
+	display: flex;
+	justify-content: space-around;
+}
+
+.blog-cart {
+	margin-right: 1px;
+	text-decoration: none;
+	color: black;
+}
+
+.blog-cart:last-child {
+	margin-right: 0;
+}
+
+.blog-cart__title {
+	margin: 0;
+	padding-bottom: 5px;
+	font-size: 24px;
+}
+
+.blog-cart__data {
+	margin: 0;
+	font-size: 20px;
+}
+
+.blog-link {
+	display: block;
+	text-decoration: none;
+	color: black;
+	padding-top: 20px;
+}
+
+.main-footer {
+	height: 200px;
+	background: #e8ecef;
+	margin-top: 50px;
 }
