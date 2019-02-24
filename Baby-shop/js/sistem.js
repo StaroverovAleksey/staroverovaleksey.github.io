@@ -11,7 +11,9 @@ var subcategory = document.querySelectorAll('.main-navigation__subcategory-list'
 var buttonWrapper = document.querySelector('.buttons-wrapper')
 var header = document.querySelector('.main-header__content-wrapper');
 var body = document.querySelector('body');
-var subcategoryIcon = document.querySelectorAll('.main-navigation__category-icon')
+var subcategoryIcon = document.querySelectorAll('.main-navigation__category-icon');
+var subcategorySize = document.querySelector('.main-navigation__subcategory-link').offsetHeight;
+var categorySize =document.querySelector('.main-navigation__category-item').offsetHeight;
 
 /*Функция возвращает координаты блока element*/
 var getPosition = function(element) {
@@ -21,10 +23,11 @@ var getPosition = function(element) {
 /*Функция "прилепляет" элемент stick к верхней границе вьюпорта, если элемент check находится вне вьюпорта,
 в противном случае, прилепляет в нижней границе элемента check.*/
 var stickElement = function(check, stick) {
-	if(getPosition(check).bottom <= 0) {
-		stick.style.top = Math.trunc(Math.abs(body.getBoundingClientRect().top)) - check.offsetHeight + 'px';
+	if(getPosition(check).bottom < 0) {
+		//stick.style.top = Math.trunc(Math.abs(body.getBoundingClientRect().top)) - check.offsetHeight + 'px';
+		stick.style.top = '0px';
 	} else {
-		stick.style.top = check.getBoundingClientRect().top + 'px';
+		stick.style.top = check.getBoundingClientRect().bottom + 'px';
 	};
 };
 
@@ -69,7 +72,7 @@ var openSubcategoryHeandler = function(evt) {
 		if(evt.target.localName === 'span') {
 			if(openCategoryButton[i] == evt.target.parentElement) {
 				
-				subcategory[i].style.height = ((subcategory[i].children.length -1) * SUBCATEGORY_SIZE) + 'px';
+				subcategory[i].style.height = ((subcategory[i].children.length -1) * subcategorySize) + 'px';
 				menu.style.height = parseInt(menu.style.height) + parseInt(subcategory[i].style.height) + 'px';
 				openCategoryButton[i].parentElement.style.color = '#e23709';
 				openCategoryButton[i].classList.add('rotate');
@@ -80,48 +83,76 @@ var openSubcategoryHeandler = function(evt) {
 		} else {
 			if(openCategoryButton[i] == evt.target) {
 
-				subcategory[i].style.height = ((subcategory[i].children.length -1) * SUBCATEGORY_SIZE) + 'px';
+				subcategory[i].style.height = ((subcategory[i].children.length -1) * subcategorySize) + 'px';
 				menu.style.height = parseInt(menu.style.height) + parseInt(subcategory[i].style.height) + 'px';
-				console.dir(subcategory[i].offsetHeight)
 				openCategoryButton[i].parentElement.style.color = '#e23709';
 				openCategoryButton[i].classList.add('rotate');
 				subcategoryIcon[i].classList.add('red');
 				openCategoryButton[i].removeEventListener('click', openSubcategoryHeandler);
 				openCategoryButton[i].addEventListener('click', closeSubcategoryHeandler);
-				console.log(menu.style.height);
 			};
 		};
 	};
 };
 
+var scrollHeandler = function(header,menu, evt) {
+	stickElement(header, menu);
+	console.dir(evt);
+	window.addEventListener('mouseover', function(evt) {
+		if(evt.target === menu) {
+			console.dir(111);
+		};
+	});
+};
+
 /*Обработчик, открывающий главное меню, при нажатии на кнопку openMenuButton.*/
 var openMenuHeandler = function(evt) {
-	menu.style.height = ((menu.children.length) * CATEGORY_SIZE) + 'px';
+
+	menu.style.height = ((menu.children.length) * categorySize) + 'px';
+	menu.style.position = 'fixed';
 	searchButton.classList.add('hidden');
 	filterButton.classList.add('hidden');
 	openMenuButton.classList.add('navigation-button--active');
 	openMenuButton.removeEventListener('click', openMenuHeandler);
 	openMenuButton.addEventListener('click', closeMenuHeandler);
 	stickElement(header, menu);
-	window.addEventListener('scroll', function() {
-		stickElement(header, menu);
+	window.addEventListener('scroll', function(evt) {
+		//stickElement(header, menu);
+		scrollHeandler(header, menu, evt);
 	});
 	for(var i = 0; i < openCategoryButton.length; i++) {
 		openCategoryButton[i].addEventListener('click', openSubcategoryHeandler);
 	};
+	menu.style.transition = '0s';
 };
 
 /*Обработчик, закрывающий главное меню, при нажатии на кнопку openMenuButton.*/
+
+/*var scrollHeandler = function(header, menu) {
+	menu.style.transition = null;
+	stickElement(header, menu);
+}
+*/
 var closeMenuHeandler = function() {
-	menu.style.height = '0px';
+	menu.style.transition = '0.5s';
+	
+	menu.style.height =  null;
+	if(header.getBoundingClientRect().bottom < 0) {
+		menu.style.top = '-' + header.offsetHeight + 'px';
+	} else {
+		menu.style.top = header.getBoundingClientRect().bottom;
+	};
+	
+	//menu.style.position = 'absolute';
 	searchButton.classList.remove('hidden');
 	filterButton.classList.remove('hidden');
 	openMenuButton.classList.remove('navigation-button--active');
 	openMenuButton.addEventListener('click', openMenuHeandler);
 	openMenuButton.removeEventListener('click', closeMenuHeandler);
-	window.removeEventListener('scroll', function() {
-		stickElement(header, menu);
-	});
+	/*window.removeEventListener('scroll', function() {
+		scrollHeandler(header, menu);
+
+	});*/
 	for(var i = 0; i < openCategoryButton.length; i++) {
 		openCategoryButton[i].removeEventListener('click', openSubcategoryHeandler);
 		subcategory[i].style.height = '0px';
