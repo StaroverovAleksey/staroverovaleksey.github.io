@@ -42,11 +42,15 @@ a:hover {
 }
 
 .main-header__content-wrapper {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	    flex-wrap: wrap;
 	max-width: 1170px;
 	margin: 0 auto;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	padding: 0 15px;
 	padding-top: 15px;
 }
@@ -180,7 +184,8 @@ a:hover {
 	font-weight: 700;
 	text-align: center;
 	padding-top: 10px;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	color: black;
 }
 
@@ -194,7 +199,9 @@ a:hover {
 	position: absolute;
 	top: -150px;
 	left: 50%;
-	transform: translate(-50%, 0);
+	-webkit-transform: translate(-50%, 0);
+	    -ms-transform: translate(-50%, 0);
+	        transform: translate(-50%, 0);
 }
 
 .main-navigation__category-list {
@@ -208,6 +215,8 @@ a:hover {
 	text-align: center;
 	overflow: hidden;
 	z-index: 2;
+	-webkit-transition: 0.5s;
+	-o-transition: 0.5s;
 	transition: 0.5s;
 	height: 0;
 }
@@ -234,6 +243,8 @@ a:hover {
 	background: transparent;
 	cursor: pointer;
 	border: none;
+	-webkit-transition: 0.5s;
+	-o-transition: 0.5s;
 	transition: 0.5s;
 }
 
@@ -255,7 +266,9 @@ a:hover {
 	height: 6px;
 	border-radius: 5px;
 	background: white;
-	transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	    -ms-transform: rotate(45deg);
+	        transform: rotate(45deg);
 }
 
 .main-navigation__category-icon::before {
@@ -268,7 +281,9 @@ a:hover {
 	height: 6px;
 	border-radius: 5px;
 	background: white;
-	transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+	    -ms-transform: rotate(-45deg);
+	        transform: rotate(-45deg);
 }
 
 .red.main-navigation__category-icon::after, .red.main-navigation__category-icon::before {
@@ -286,6 +301,8 @@ a:hover {
 	list-style-type: none;
 	background: white;
 	overflow: hidden;
+	-webkit-transition: 0.5s;
+	-o-transition: 0.5s;
 	transition: 0.5s;
 	height: 0;
 }
@@ -334,6 +351,7 @@ a:hover {
 }
 
 .buttons-wrapper {
+	position: -webkit-sticky;
 	position: sticky;
 	top: 0px;
 	display: block;
@@ -360,6 +378,8 @@ a:hover {
 	border-radius: 4px;
 	background: white;
 	margin: 0 auto;
+	-webkit-transition: 0.5s;
+	-o-transition: 0.5s;
 	transition: 0.5s;
 }
 
@@ -373,6 +393,8 @@ a:hover {
 	border-radius: 4px;
 	background: white;
 	border: none;
+	-webkit-transition: 0.5s;
+	-o-transition: 0.5s;
 	transition: 0.5s;
 }
 
@@ -386,6 +408,8 @@ a:hover {
 	border-radius: 4px;
 	background: white;
 	border: none;
+	-webkit-transition: 0.5s;
+	-o-transition: 0.5s;
 	transition: 0.5s;
 }
 
@@ -394,11 +418,15 @@ a:hover {
 }
 
 .navigation-button--active .navigation-button__paint::after {
-	transform: rotate(45deg) translate(5px, 5px);
+	-webkit-transform: rotate(45deg) translate(5px, 5px);
+	    -ms-transform: rotate(45deg) translate(5px, 5px);
+	        transform: rotate(45deg) translate(5px, 5px);
 }
 
 .navigation-button--active .navigation-button__paint::before {
-	transform: rotate(-45deg) translate(12px, -12px);
+	-webkit-transform: rotate(-45deg) translate(12px, -12px);
+	    -ms-transform: rotate(-45deg) translate(12px, -12px);
+	        transform: rotate(-45deg) translate(12px, -12px);
 }
 
 .search-button {
@@ -464,7 +492,8 @@ a:hover {
 	padding-bottom: 100px;
 	max-width: 1170px;
 	margin: 0 auto;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	margin-top: 50px;
 }
 
@@ -480,12 +509,16 @@ a:hover {
 
 
 .category-wrapper {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	justify-content: space-around;
+	-ms-flex-pack: distribute;
+	    justify-content: space-around;
 }
 
 .category-item {
-	flex-basis: 100%;
+	-ms-flex-preferred-size: 100%;
+	    flex-basis: 100%;
 	display: block;
 	text-decoration: none;
 	color: black;
@@ -526,7 +559,8 @@ a:hover {
 	padding-left: 15px;
 	padding-right: 15px;
 	margin: 0 auto;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 }
 
 .slider-button--left, .slider-button--right {
@@ -544,12 +578,16 @@ a:hover {
 
 .slider-button--left {
 	left: 10%;
-	transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	    -ms-transform: translate(-50%, -50%);
+	        transform: translate(-50%, -50%);
 }
 
 .slider-button--right {
 	left: 90%;
-	transform: rotate(180deg) translate(50%, 50%);
+	-webkit-transform: rotate(180deg) translate(50%, 50%);
+	    -ms-transform: rotate(180deg) translate(50%, 50%);
+	        transform: rotate(180deg) translate(50%, 50%);
 }
 
 .slider-button__paint--left, .slider-button__paint--right {
@@ -561,7 +599,9 @@ a:hover {
 	height: 8px;
 	border-radius: 4px;
 	background: #758a95;
-	transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+	    -ms-transform: rotate(-45deg);
+	        transform: rotate(-45deg);
 }
 
 .slider-button__paint--left::before, .slider-button__paint--right::before{
@@ -574,20 +614,25 @@ a:hover {
 	height: 8px;
 	border-radius: 4px;
 	background: #758a95;
-	transform: rotate(90deg);
+	-webkit-transform: rotate(90deg);
+	    -ms-transform: rotate(90deg);
+	        transform: rotate(90deg);
 }
 
 .discount-card {
 	position: absolute;
 	top: 200px;
 	left: 33%;
-	transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	    -ms-transform: translate(-50%, -50%);
+	        transform: translate(-50%, -50%);
 	background: white;
 	display: inline-block;
 	width: 28%;
 	padding: 50px 35px;
 	border-radius: 3px;
-	box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.2);
+	-webkit-box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.2);
+	        box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.2);
 }
 
 .discount-card__tittle {
@@ -698,7 +743,8 @@ a:hover {
 	border-radius: 50%;
 	background: white;
 	overflow: hidden;
-	box-shadow: 0px 13px 90px 0px rgba(0, 0, 0, 0.2);
+	-webkit-box-shadow: 0px 13px 90px 0px rgba(0, 0, 0, 0.2);
+	        box-shadow: 0px 13px 90px 0px rgba(0, 0, 0, 0.2);
 }
 
 .set-product__button {
@@ -712,6 +758,8 @@ a:hover {
 	border-radius: 50%;
 	cursor: pointer;
 	opacity: 0.99;
+	-webkit-transition: 0.5s;
+	-o-transition: 0.5s;
 	transition: 0.5s;
 	z-index: 1;
 }
@@ -725,7 +773,9 @@ a:hover {
 	height: 4px;
 	border-radius: 2px;
 	background: white;
-	transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	    -ms-transform: rotate(45deg);
+	        transform: rotate(45deg);
 }
 
 .set-product__paint::before {
@@ -738,7 +788,9 @@ a:hover {
 	height: 4px;
 	border-radius: 2px;
 	background: white;
-	transform: rotate(90deg);
+	-webkit-transform: rotate(90deg);
+	    -ms-transform: rotate(90deg);
+	        transform: rotate(90deg);
 }
 
 .product-cart {
@@ -748,7 +800,8 @@ a:hover {
 	width: 200px;
 	height: 340px;
 	background: white;
-	box-shadow: 0px 13px 73px 0px rgba(0, 0, 0, 0.16);
+	-webkit-box-shadow: 0px 13px 73px 0px rgba(0, 0, 0, 0.16);
+	        box-shadow: 0px 13px 73px 0px rgba(0, 0, 0, 0.16);
 	border-radius: 3px;
 }
 
@@ -820,7 +873,11 @@ a:hover {
 }
 
 .rotate {
-	transform: rotate(180deg);
+	-webkit-transform: rotate(180deg);
+	    -ms-transform: rotate(180deg);
+	        transform: rotate(180deg);
+	-webkit-transition: 0.5s;
+	-o-transition: 0.5s;
 	transition: 0.5s;
 }
 
@@ -851,17 +908,22 @@ a:hover {
 }
 
 .quote-wrapper {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
 	max-width: 1170px;
 	margin: 0 auto;
-	justify-content: space-around;
+	-ms-flex-pack: distribute;
+	    justify-content: space-around;
 }
 
 .quote-cart {
-	flex-basis: 100%;
+	-ms-flex-preferred-size: 100%;
+	    flex-basis: 100%;
 	height: 100%;
 	margin: 0 15px;
-	box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+	        box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
 }
 
 .quote-cart__image-wrapper {
@@ -923,8 +985,11 @@ a:hover {
 	max-width: 1170px;
 	margin: 0 auto;
 	padding: 0 15px;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	justify-content: space-around;
+	-ms-flex-pack: distribute;
+	    justify-content: space-around;
 }
 
 .blog-cart {
@@ -962,10 +1027,17 @@ a:hover {
 
 .footer-wrapper {
 	max-width: 1170px;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	flex-wrap: wrap;
-	flex-direction: column;
-	align-content: space-between;
+	-ms-flex-wrap: wrap;
+	    flex-wrap: wrap;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+	-ms-flex-line-pack: justify;
+	    align-content: space-between;
 	position: relative;
 	margin: 0 auto;
 	padding: 0 15px;
