@@ -531,7 +531,7 @@ a:hover {
 }
 
 .main-slider__image:nth-child(2) {
-	position: static;
+	position: relative;
 	opacity: 1;
 }
 
