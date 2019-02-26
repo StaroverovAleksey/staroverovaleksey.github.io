@@ -522,6 +522,7 @@ a:hover {
 
 .main-slider__image {
 	position: absolute;
+	left: 0;
 	top: 0;
 	opacity: 0;
 	-webkit-transition: 5s;
