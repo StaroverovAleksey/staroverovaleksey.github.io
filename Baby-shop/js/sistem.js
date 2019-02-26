@@ -1,3 +1,5 @@
+'use strict';
+
 /*ОТКРЫТИЕ И ЗАКРЫТИЕ МЕНЮ НА ГЛАВНОЙ СТРАНИЦЕ*/
 
 var SUBCATEGORY_SIZE = 64.8;
@@ -117,7 +119,6 @@ var openMenuHeandler = function(evt) {
 	openMenuButton.addEventListener('click', closeMenuHeandler);
 	stickElement(header, menu);
 	window.addEventListener('scroll', function(evt) {
-		//stickElement(header, menu);
 		scrollHeandler(header, menu, evt);
 	});
 	for(var i = 0; i < openCategoryButton.length; i++) {
@@ -149,10 +150,9 @@ var closeMenuHeandler = function() {
 	openMenuButton.classList.remove('navigation-button--active');
 	openMenuButton.addEventListener('click', openMenuHeandler);
 	openMenuButton.removeEventListener('click', closeMenuHeandler);
-	/*window.removeEventListener('scroll', function() {
-		scrollHeandler(header, menu);
-
-	});*/
+	window.removeEventListener('scroll', function(evt) {
+		scrollHeandler(header, menu, evt);
+	});
 	for(var i = 0; i < openCategoryButton.length; i++) {
 		openCategoryButton[i].removeEventListener('click', openSubcategoryHeandler);
 		subcategory[i].style.height = '0px';
@@ -165,6 +165,217 @@ var closeMenuHeandler = function() {
 openMenuButton.addEventListener('click', openMenuHeandler);
 
 
+
+
+
+
+
+
+/*ПОВЕДЕНИЕ ОСНОВНОГО СЛАЙДЕРА НА ГЛАВНОЙ СТРАНИЦЕ.*/
+
+(function() {
+
+var DELAY = 5000;
+var slides = document.querySelectorAll('.main-slider__image');
+var counter = 1;
+
+/*Функция коллбэк, с каждым запуском увеличивающая прозрачность одного слайда
+и уменьшающая у остальных. */
+var toIncreaseOpacity = function () {
+	slides[counter].style.opacity = '1';
+
+	if(counter === 0) {
+		slides[slides.length - 1].style.opacity = '0';
+	} else {
+		slides[counter - 1].style.opacity = '0';
+	}
+	
+	if(counter === slides.length - 1) {
+		counter = 0;
+	} else {
+		counter++;
+	};	
+};
+
+/*Функция-таймер.*/
+var swapSlide = function recoll(collback) {
+	collback();
+	setTimeout(function() {
+		recoll(collback);
+	}, DELAY);
+};
+
+setTimeout(function() {
+	swapSlide(toIncreaseOpacity);
+}, DELAY);
+
+})();
+
+
+
+
+
+
+
+/*ПОВЕДЕНИЕ СЛАЙДЕРА В БЛОКЕ DISCOUNT*/
+function Slider(right, left, array, counter, showRight, showLeft, hideRight, hideLeft, others, rightHeandler, leftHeandler) {
+	this.rightButton = right;              /*Кнопка переключения слайдера направо*/
+	this.leftButton = left;                /*Кнопка переключения слайдера налево*/
+	this.slideArray = array;               /*Массив слайдов*/
+	this.counter = counter;                /*Счетчик номера активного слайда в массиве слайдов*/
+	this.showRight = showRight;            /*Класс с анимацией, показывающей новый слайд при нажатии правой кнопки*/
+	this.showLeft = showLeft;              /*Класс с анимацией, показывающей новый слайд при нажатии левой кнопки*/
+	this.hideRight = hideRight;            /*Класс с анимацией, показывающей старый слайд при нажатии правой кнопки*/
+	this.hideLeft = hideLeft;              /*Класс с анимацией, показывающей старый слайд при нажатии левой кнопки*/
+	this.others = others;                  /*Класс, применяемый к остальным слайдам*/
+	this.rightHeandler = rightHeandler;    /*Обработчик на правой кнопке*/
+	this.leftHeandler = leftHeandler;      /*Обработчик на правой кнопке*/
+};
+
+var discount = new Slider(
+	rightButtonDiscount = document.querySelector('.discount-button--right'),
+	leftButtonDiscount = document.querySelector('.discount-button--left')
+	);
+console.dir(discount);
+
+var ANIMATION_TIME = 500;
+var rightButtonDiscount = document.querySelector('.discount-button--right');
+var leftButtonDiscount = document.querySelector('.discount-button--left');
+var slidesDiscount = document.querySelectorAll('.discount-slide-wrapper');
+slidesDiscount.counter = 0;
+
+	function rightButtonHeandler(slideArrey, activButton, inactivButton, counter, evt) {
+		evt.preventDefault();
+		counter = slideArrey.counter;
+
+		(function(){
+			var previousSlide = counter - 1;
+			if(previousSlide === slideArrey.length) {
+				previousSlide = 0;
+			};
+			if(previousSlide === -1) {
+				previousSlide = slideArrey.length -1;
+			}
+			slideArrey[previousSlide].classList.remove('show-right');
+			slideArrey[previousSlide].classList.remove('show-left');
+			slideArrey[previousSlide].classList.remove('hide');
+			slideArrey[previousSlide].classList.add('hidden');
+		})();
+		
+		(function(){
+			slideArrey[counter].classList.remove('hidden');
+			slideArrey[counter].classList.remove('show-right');
+			slideArrey[counter].classList.remove('show-left');
+			slideArrey[counter].classList.add('hide');
+		})();
+		
+		(function(){
+			var nextSlide = counter +1;
+			if(nextSlide === slideArrey.length) {
+				nextSlide = 0;
+			};
+			slideArrey[nextSlide].classList.remove('hidden');
+			slideArrey[nextSlide].classList.remove('hide');
+			slideArrey[nextSlide].classList.add('show-right');
+			slideArrey[nextSlide].classList.remove('show-left');
+		})();
+
+		counter++;
+		if(counter === slideArrey.length) {
+			counter = 0;
+		};
+
+		inactivButton.classList.add('hidden');
+		activButton.classList.add('activity');
+		//activButton.removeEventListener('click', rightButtonHeandler);
+		
+		setTimeout(function() {
+			inactivButton.classList.remove('hidden');
+			activButton.classList.remove('activity');
+			//activButton.addEventListener('click', callBackRightDiscount);
+		}, ANIMATION_TIME);
+		slideArrey.counter = counter;
+	};
+
+	function leftButtonHeandler(slideArrey, activButton, inactivButton,  counter, evt) {
+		evt.preventDefault();
+		counter = slideArrey.counter;
+
+		(function(){
+			var previousSlide = counter + 1;
+			if(previousSlide === slideArrey.length) {
+				previousSlide = 0;
+			};
+			slideArrey[previousSlide].classList.remove('show-right');
+			slideArrey[previousSlide].classList.remove('show-left');
+			slideArrey[previousSlide].classList.remove('hide');
+			slideArrey[previousSlide].classList.add('hidden');
+		})();
+		
+		(function(){
+			slideArrey[counter].classList.remove('hidden');
+			slideArrey[counter].classList.remove('show-right');
+			slideArrey[counter].classList.remove('show-left');
+			slideArrey[counter].classList.add('hide');
+		})();
+		
+		(function(){
+			var nextSlide = counter - 1;
+			if(nextSlide < 0) {
+				nextSlide = slideArrey.length - 1;
+			};
+			slideArrey[nextSlide].classList.remove('hidden');
+			slideArrey[nextSlide].classList.remove('hide');
+			slideArrey[nextSlide].classList.remove('show-right');
+			slideArrey[nextSlide].classList.add('show-left');	
+		})();
+
+		counter--;
+		if(counter < 0) {
+			counter = slideArrey.length - 1;
+		};
+
+		inactivButton.classList.add('hidden');
+		activButton.classList.add('activity');
+		//activButton.removeEventListener('click', callBackLeftDiscount);
+		
+		setTimeout(function() {
+			inactivButton.classList.remove('hidden');
+			activButton.classList.remove('activity');
+			//activButton.addEventListener('click', callBackLeftDiscount);
+		}, ANIMATION_TIME);
+		slideArrey.counter = counter;
+	};
+
+var callBackRightDiscount = rightButtonHeandler.bind(
+	this,
+	slidesDiscount,
+	rightButtonDiscount,
+	leftButtonDiscount,
+	slidesDiscount.counter
+	);
+rightButtonDiscount.addEventListener('click', callBackRightDiscount);
+
+var callBackLeftDiscount = leftButtonHeandler.bind(this, slidesDiscount, leftButtonDiscount, rightButtonDiscount, slidesDiscount.counter);
+leftButtonDiscount.addEventListener('click', callBackLeftDiscount);
+
+
+
+
+
+/*ПОВЕДЕНИЕ СЛАЙДЕРА В БЛОКЕ SET*/
+ANIMATION_TIME = 500;
+var rightButtonSet = document.querySelector('.set-button--right');
+var leftButtonSet = document.querySelector('.set-button--left');
+var slideSet = document.querySelectorAll('.set-wrapper');
+slideSet.counter = 0;
+console.log(document.querySelector('.set-button--right'));
+
+var callBackRightSet = rightButtonHeandler.bind(this, slideSet, rightButtonSet, leftButtonSet, slideSet.counter);
+rightButtonSet.addEventListener('click', callBackRightSet);
+
+var callBackLeftSet = leftButtonHeandler.bind(this, slideSet, leftButtonSet, rightButtonSet, slideSet.counter);
+leftButtonSet.addEventListener('click', callBackLeftSet);
 
 
 
