@@ -1,7 +1,6 @@
 'use strict';
 
 /*ОТКРЫТИЕ И ЗАКРЫТИЕ МЕНЮ НА ГЛАВНОЙ СТРАНИЦЕ*/
-
 var SUBCATEGORY_SIZE = 64.8;
 var CATEGORY_SIZE = 92.8;
 var openMenuButton = document.querySelector('.navigation-button');
@@ -26,7 +25,6 @@ var getPosition = function(element) {
 в противном случае, прилепляет в нижней границе элемента check.*/
 var stickElement = function(check, stick) {
 	if(getPosition(check).bottom < 0) {
-		//stick.style.top = Math.trunc(Math.abs(body.getBoundingClientRect().top)) - check.offsetHeight + 'px';
 		stick.style.top = '0px';
 	} else {
 		stick.style.top = check.getBoundingClientRect().bottom + 'px';
@@ -97,62 +95,46 @@ var openSubcategoryHeandler = function(evt) {
 	};
 };
 
-var scrollHeandler = function(header,menu, evt) {
-	stickElement(header, menu);
-	console.dir(evt);
-	window.addEventListener('mouseover', function(evt) {
-		if(evt.target === menu) {
-			console.dir(111);
-		};
-	});
+var scrollHeandler = function() {
+	if(getPosition(header).bottom > 0) {
+		menu.style.position = 'absolute';
+	} else {
+		menu.style.position = 'fixed';
+	};
 };
 
 /*Обработчик, открывающий главное меню, при нажатии на кнопку openMenuButton.*/
 var openMenuHeandler = function(evt) {
-
 	menu.style.height = ((menu.children.length) * categorySize) + 'px';
-	menu.style.position = 'fixed';
+	if(getPosition(header).bottom < 0) {
+		menu.style.position = 'fixed';
+	};
+
 	searchButton.classList.add('hidden');
 	filterButton.classList.add('hidden');
 	openMenuButton.classList.add('navigation-button--active');
 	openMenuButton.removeEventListener('click', openMenuHeandler);
 	openMenuButton.addEventListener('click', closeMenuHeandler);
-	stickElement(header, menu);
-	window.addEventListener('scroll', function(evt) {
-		scrollHeandler(header, menu, evt);
-	});
+	window.addEventListener('scroll', scrollHeandler);
 	for(var i = 0; i < openCategoryButton.length; i++) {
 		openCategoryButton[i].addEventListener('click', openSubcategoryHeandler);
 	};
-	menu.style.transition = '0s';
 };
 
 /*Обработчик, закрывающий главное меню, при нажатии на кнопку openMenuButton.*/
-
-/*var scrollHeandler = function(header, menu) {
-	menu.style.transition = null;
-	stickElement(header, menu);
-}
-*/
 var closeMenuHeandler = function() {
-	menu.style.transition = '0.5s';
+	setTimeout(function(){
+		menu.style.top = null;
+		menu.style.position = null;
+	}, 500);
 	
-	menu.style.height =  null;
-	if(header.getBoundingClientRect().bottom < 0) {
-		menu.style.top = '-' + header.offsetHeight + 'px';
-	} else {
-		menu.style.top = header.getBoundingClientRect().bottom;
-	};
-	
-	//menu.style.position = 'absolute';
+	menu.style.height = '0';
 	searchButton.classList.remove('hidden');
 	filterButton.classList.remove('hidden');
 	openMenuButton.classList.remove('navigation-button--active');
 	openMenuButton.addEventListener('click', openMenuHeandler);
 	openMenuButton.removeEventListener('click', closeMenuHeandler);
-	window.removeEventListener('scroll', function(evt) {
-		scrollHeandler(header, menu, evt);
-	});
+	window.removeEventListener('scroll', scrollHeandler);
 	for(var i = 0; i < openCategoryButton.length; i++) {
 		openCategoryButton[i].removeEventListener('click', openSubcategoryHeandler);
 		subcategory[i].style.height = '0px';
@@ -171,8 +153,169 @@ openMenuButton.addEventListener('click', openMenuHeandler);
 
 
 
-/*ПОВЕДЕНИЕ ОСНОВНОГО СЛАЙДЕРА НА ГЛАВНОЙ СТРАНИЦЕ.*/
 
+/*ПОЛЬЗОВАТЕЛЬСКОЕ МЕНЮ*/
+var userMenu = 	{
+	menu: document.querySelector('.user-navigation__user-menu'),        /*Выпадающее меню меню*/
+	oButton: document.querySelector('.user-navigation__login'),         /*Кнопка открытия меню*/
+	cButton: document.querySelector('.navigation-button'),              /*Кнопка закрытия меню*/
+	enter: document.querySelector('.user-navigation__enter'),           /*Раздел меню с авторизацией*/
+	reg: document.querySelector('.user-navigation__reg'),               /*Раздел меню с регистрацией*/
+	regButton: document.querySelector('.user-menu__reg'),               /*Кнопка открытия регистрации*/
+	forget: document.querySelector('.user-navigation__forget'),         /*Раздел меню с восстановлением пароля*/
+	forgetButton: document.querySelector('.user-menu__forget'),         /*Кнопка открытия восстановления пароля*/
+	regBack: document.querySelector('.user-navigation__back-reg'),      /*Кнопка "назад" в разделе регистрации*/
+	forgetBack: document.querySelector('.user-navigation__back-forget') /*Кнопка "назад" в разделе восстановления пароля*/
+};
+
+userMenu.backHeandler = function() {
+	userMenu.reg.style.opacity = '0';
+	userMenu.forget.style.opacity = '0';
+	setTimeout(function() {
+		userMenu.reg.classList.add('hidden');
+		userMenu.forget.classList.add('hidden');
+		userMenu.enter.style.opacity = '1';
+	}, 500);
+	userMenu.regBack.removeEventListener('click', userMenu.backHeandler);
+};
+
+userMenu.openRegHeandler = function() {
+	userMenu.enter.style.opacity = '0';
+	userMenu.reg.classList.remove('hidden');
+	userMenu.regBack.addEventListener('click', userMenu.backHeandler);
+	setTimeout(function() {
+		userMenu.reg.style.opacity = '1';
+	}, 500);
+};
+
+userMenu.openForgetHeandler = function() {
+	userMenu.enter.style.opacity = '0';
+	userMenu.forget.classList.remove('hidden');
+	userMenu.forgetBack.addEventListener('click', userMenu.backHeandler);
+	setTimeout(function() {
+		userMenu.forget.style.opacity = '1';
+	}, 500);
+};
+
+userMenu.openUserMenuHeandler = function() {
+	
+	if(userMenu.menu === document.querySelector('.user-navigation__user-menu')) {
+		userMenu.oButton.classList.add('user-navigation__login--active');
+	};
+
+	if(userMenu.cButton.classList.contains('navigation-button--active')) {
+		closeMenuHeandler();
+		search.clodeSearchHeandler();
+		setTimeout(open, 500);
+	}  else {
+		open();
+	};
+
+	function open() {
+		userMenu.menu.style.height = userMenu.menu.children[0].offsetHeight + 'px';
+		userMenu.menu.style.top = document.querySelector('.main-header').offsetHeight + 'px';
+		userMenu.cButton.classList.add('navigation-button--active');
+		document.querySelector('.search-button').classList.add('hidden');
+		document.querySelector('.filter-button').classList.add('hidden');
+	};
+
+	userMenu.forgetButton.addEventListener('click', userMenu.openForgetHeandler);
+	userMenu.regButton.addEventListener('click', userMenu.openRegHeandler);
+	userMenu.oButton.removeEventListener('click', userMenu.openUserMenuHeandler);
+	userMenu.cButton.addEventListener('click', userMenu.closeUserMenuHeandler);
+	openMenuButton.removeEventListener('click', openMenuHeandler);
+};
+
+userMenu.closeUserMenuHeandler = function() {
+	if(userMenu.menu === document.querySelector('.user-navigation__user-menu')) {
+		userMenu.oButton.classList.remove('user-navigation__login--active');
+	};
+
+	userMenu.menu.style.height = '0';
+	userMenu.cButton.classList.remove('navigation-button--active');
+	document.querySelector('.search-button').classList.remove('hidden');
+	document.querySelector('.filter-button').classList.remove('hidden');
+	setTimeout(function() {
+		userMenu.reg.classList.add('hidden');
+		userMenu.reg.style.opacity = '0';
+		userMenu.forget.classList.add('hidden');
+		userMenu.forget.style.opacity = '0';
+		userMenu.enter.style.opacity = '1';
+	}, 500);
+
+	userMenu.forgetButton.removeEventListener('click', userMenu.openForgetHeandler);
+	userMenu.regButton.removeEventListener('click', userMenu.openRegHeandler);
+	userMenu.oButton.addEventListener('click', userMenu.openUserMenuHeandler);
+	userMenu.cButton.removeEventListener('click', userMenu.closeUserMenuHeandler);
+	openMenuButton.addEventListener('click', openMenuHeandler);
+};
+
+userMenu.oButton.addEventListener('click', userMenu.openUserMenuHeandler);
+
+
+
+
+
+
+/*ПОИСК*/
+var search = {
+	menu: document.querySelector('.search'),                   /*меню поиска*/
+	oButton: document.querySelector('.search-button'),         /*кнопка открытия поиска*/
+	cButton: document.querySelector('.navigation-button')      /*кнопка закрытия поиска*/
+}
+
+search.ScrollHeandler = function() {
+	if(getPosition(document.querySelector('.main-header')).bottom > 0) {
+		search.menu.style.position = 'absolute';
+	} else {
+		search.menu.style.position = 'fixed';
+	};
+};
+search.ScrollHeandler = search.ScrollHeandler.bind(search);
+
+search.openSearchHeandler = function() {
+	if(getPosition(document.querySelector('.main-header')).bottom < 0) {
+		search.menu.style.position = 'fixed';
+	};
+
+	search.menu.style.height = search.menu.children[0].offsetHeight + 'px';
+	search.cButton.classList.add('navigation-button--active');
+	document.querySelector('.search-button').classList.add('hidden');
+	document.querySelector('.filter-button').classList.add('hidden');
+
+	window.addEventListener('scroll', search.ScrollHeandler);
+	search.oButton.removeEventListener('click', search.openSearchHeandler);
+	search.cButton.addEventListener('click', search.clodeSearchHeandler);
+	openMenuButton.removeEventListener('click', openMenuHeandler);
+};
+
+search.clodeSearchHeandler = function() {
+	search.menu.style.height = '0';
+	search.cButton.classList.remove('navigation-button--active');
+	document.querySelector('.search-button').classList.remove('hidden');
+	document.querySelector('.filter-button').classList.remove('hidden');
+	setTimeout(function(){
+		search.menu.style.top = null;
+		search.menu.style.position = null;
+	}, 500);
+
+	window.removeEventListener('scroll', search.ScrollHeandler);
+	search.oButton.addEventListener('click', search.openSearchHeandler);
+	search.cButton.removeEventListener('click', search.clodeSearchHeandler);
+	openMenuButton.addEventListener('click', openMenuHeandler);
+}
+
+search.oButton.addEventListener('click', search.openSearchHeandler);
+
+
+
+
+
+
+
+
+
+/*ПОВЕДЕНИЕ ОСНОВНОГО СЛАЙДЕРА НА ГЛАВНОЙ СТРАНИЦЕ.*/
 (function() {
 
 var DELAY = 5000;
@@ -215,167 +358,179 @@ setTimeout(function() {
 
 
 
+(function() {
 
-
-/*ПОВЕДЕНИЕ СЛАЙДЕРА В БЛОКЕ DISCOUNT*/
-function Slider(right, left, array, counter, showRight, showLeft, hideRight, hideLeft, others, rightHeandler, leftHeandler) {
-	this.rightButton = right;              /*Кнопка переключения слайдера направо*/
-	this.leftButton = left;                /*Кнопка переключения слайдера налево*/
-	this.slideArray = array;               /*Массив слайдов*/
-	this.counter = counter;                /*Счетчик номера активного слайда в массиве слайдов*/
-	this.showRight = showRight;            /*Класс с анимацией, показывающей новый слайд при нажатии правой кнопки*/
-	this.showLeft = showLeft;              /*Класс с анимацией, показывающей новый слайд при нажатии левой кнопки*/
-	this.hideRight = hideRight;            /*Класс с анимацией, показывающей старый слайд при нажатии правой кнопки*/
-	this.hideLeft = hideLeft;              /*Класс с анимацией, показывающей старый слайд при нажатии левой кнопки*/
-	this.others = others;                  /*Класс, применяемый к остальным слайдам*/
-	this.rightHeandler = rightHeandler;    /*Обработчик на правой кнопке*/
-	this.leftHeandler = leftHeandler;      /*Обработчик на правой кнопке*/
+/*УНИВЕРСАЛЬНЫЙ КОНСТРУКТОР, ОПИСЫВАЮЩИЙ ПОВЕДЕНИЕ СЛАЙДЕРА*/
+function Slider(right, left, array, showRight, showLeft, hideRight, hideLeft, others, time) {
+	this.rButton = right;              /*Кнопка переключения слайдера направо*/
+	this.lButton = left;               /*Кнопка переключения слайдера налево*/
+	this.slideArray = array;           /*Массив слайдов*/
+	this.rShow = showRight;            /*Класс с анимацией, показывающей новый слайд при нажатии правой кнопки*/
+	this.lShow = showLeft;             /*Класс с анимацией, показывающей новый слайд при нажатии левой кнопки*/
+	this.rHide = hideRight;            /*Класс с анимацией, скрывающий старый слайд при нажатии правой кнопки*/
+	this.lHide = hideLeft;             /*Класс с анимацией, скрывающий старый слайд при нажатии левой кнопки*/
+	this.others = others;              /*Класс, применяемый к остальным слайдам*/
+	this.time = time;                  /*Время работы анимации переключения слайдов*/
+	this.counter = 0;                  /*Счетчик номера активного слайда в массиве слайдов*/	
 };
 
-var discount = new Slider(
-	rightButtonDiscount = document.querySelector('.discount-button--right'),
-	leftButtonDiscount = document.querySelector('.discount-button--left')
-	);
-console.dir(discount);
+Slider.prototype.rHeandler = rightButtonHeandler;              /*Обработчик на правой кнопке*/
+Slider.prototype.lHeandler = leftButtonHeandler;               /*Обработчик на левой кнопке*/
+Slider.prototype.bindContext = function() {    	               /*Привязка обработчиков к контексту*/
+	this.rHeandler = this.rHeandler.bind(this);
+	this.lHeandler = this.lHeandler.bind(this);  
+};
+Slider.prototype.hangHeandler = function() {                   /*Установка обработчиков на кнопки*/
+	this.rButton.addEventListener('click', this.rHeandler);
+	this.lButton.addEventListener('click', this.lHeandler);
+};
+	
 
-var ANIMATION_TIME = 500;
-var rightButtonDiscount = document.querySelector('.discount-button--right');
-var leftButtonDiscount = document.querySelector('.discount-button--left');
-var slidesDiscount = document.querySelectorAll('.discount-slide-wrapper');
-slidesDiscount.counter = 0;
-
-	function rightButtonHeandler(slideArrey, activButton, inactivButton, counter, evt) {
-		evt.preventDefault();
-		counter = slideArrey.counter;
-
-		(function(){
-			var previousSlide = counter - 1;
-			if(previousSlide === slideArrey.length) {
-				previousSlide = 0;
-			};
-			if(previousSlide === -1) {
-				previousSlide = slideArrey.length -1;
-			}
-			slideArrey[previousSlide].classList.remove('show-right');
-			slideArrey[previousSlide].classList.remove('show-left');
-			slideArrey[previousSlide].classList.remove('hide');
-			slideArrey[previousSlide].classList.add('hidden');
-		})();
+function rightButtonHeandler(evt) {
+	evt.preventDefault();
 		
-		(function(){
-			slideArrey[counter].classList.remove('hidden');
-			slideArrey[counter].classList.remove('show-right');
-			slideArrey[counter].classList.remove('show-left');
-			slideArrey[counter].classList.add('hide');
-		})();
+	var previousSlide = this.counter - 1;
+	if(previousSlide === this.slideArray.length) {
+		previousSlide = 0;
+	};
+	if(previousSlide === -1) {
+		previousSlide = this.slideArray.length -1;
+	}
+	this.slideArray[previousSlide].classList.remove(this.rShow);
+	this.slideArray[previousSlide].classList.remove(this.lShow);
+	this.slideArray[previousSlide].classList.remove(this.rHide);
+	this.slideArray[previousSlide].classList.remove(this.lHide);
+	this.slideArray[previousSlide].classList.add(this.others);
 		
-		(function(){
-			var nextSlide = counter +1;
-			if(nextSlide === slideArrey.length) {
-				nextSlide = 0;
-			};
-			slideArrey[nextSlide].classList.remove('hidden');
-			slideArrey[nextSlide].classList.remove('hide');
-			slideArrey[nextSlide].classList.add('show-right');
-			slideArrey[nextSlide].classList.remove('show-left');
-		})();
-
-		counter++;
-		if(counter === slideArrey.length) {
-			counter = 0;
-		};
-
-		inactivButton.classList.add('hidden');
-		activButton.classList.add('activity');
-		//activButton.removeEventListener('click', rightButtonHeandler);
-		
-		setTimeout(function() {
-			inactivButton.classList.remove('hidden');
-			activButton.classList.remove('activity');
-			//activButton.addEventListener('click', callBackRightDiscount);
-		}, ANIMATION_TIME);
-		slideArrey.counter = counter;
+	
+	this.slideArray[this.counter].classList.remove(this.others);
+	this.slideArray[this.counter].classList.remove(this.rShow);
+	this.slideArray[this.counter].classList.remove(this.lShow);
+	this.slideArray[this.counter].classList.remove(this.lHide);
+	this.slideArray[this.counter].classList.add(this.rHide);
+	
+	var nextSlide = this.counter +1;
+	if(nextSlide === this.slideArray.length) {
+		nextSlide = 0;
+	};
+	this.slideArray[nextSlide].classList.remove(this.others);
+	this.slideArray[nextSlide].classList.remove(this.rHide);
+	this.slideArray[nextSlide].classList.remove(this.lHide);
+	this.slideArray[nextSlide].classList.add(this.rShow);
+	this.slideArray[nextSlide].classList.remove(this.lShow);
+	
+	this.counter++;
+	if(this.counter === this.slideArray.length) {
+		this.counter = 0;
 	};
 
-	function leftButtonHeandler(slideArrey, activButton, inactivButton,  counter, evt) {
-		evt.preventDefault();
-		counter = slideArrey.counter;
-
-		(function(){
-			var previousSlide = counter + 1;
-			if(previousSlide === slideArrey.length) {
-				previousSlide = 0;
-			};
-			slideArrey[previousSlide].classList.remove('show-right');
-			slideArrey[previousSlide].classList.remove('show-left');
-			slideArrey[previousSlide].classList.remove('hide');
-			slideArrey[previousSlide].classList.add('hidden');
-		})();
+	this.lButton.classList.add('hidden');
+	this.rButton.classList.add('activity');
+	this.rButton.removeEventListener('click', this.rHeandler);
 		
-		(function(){
-			slideArrey[counter].classList.remove('hidden');
-			slideArrey[counter].classList.remove('show-right');
-			slideArrey[counter].classList.remove('show-left');
-			slideArrey[counter].classList.add('hide');
-		})();
-		
-		(function(){
-			var nextSlide = counter - 1;
-			if(nextSlide < 0) {
-				nextSlide = slideArrey.length - 1;
-			};
-			slideArrey[nextSlide].classList.remove('hidden');
-			slideArrey[nextSlide].classList.remove('hide');
-			slideArrey[nextSlide].classList.remove('show-right');
-			slideArrey[nextSlide].classList.add('show-left');	
-		})();
+	var slider = this;
+	setTimeout(function() {
+		slider.lButton.classList.remove('hidden');
+		slider.rButton.classList.remove('activity');
+		slider.rButton.addEventListener('click', slider.rHeandler);
+	}, slider.time);
+};
 
-		counter--;
-		if(counter < 0) {
-			counter = slideArrey.length - 1;
-		};
+function leftButtonHeandler(evt) {
+	evt.preventDefault();
 
-		inactivButton.classList.add('hidden');
-		activButton.classList.add('activity');
-		//activButton.removeEventListener('click', callBackLeftDiscount);
+	var previousSlide = this.counter + 1;
+	if(previousSlide === this.slideArray.length) {
+		previousSlide = 0;
+	};
+	this.slideArray[previousSlide].classList.remove(this.rShow);
+	this.slideArray[previousSlide].classList.remove(this.lShow);
+	this.slideArray[previousSlide].classList.remove(this.lHide);
+	this.slideArray[previousSlide].classList.remove(this.rHide);
+	this.slideArray[previousSlide].classList.add(this.others);
 		
-		setTimeout(function() {
-			inactivButton.classList.remove('hidden');
-			activButton.classList.remove('activity');
-			//activButton.addEventListener('click', callBackLeftDiscount);
-		}, ANIMATION_TIME);
-		slideArrey.counter = counter;
+
+	this.slideArray[this.counter].classList.remove(this.others);
+	this.slideArray[this.counter].classList.remove(this.rShow);
+	this.slideArray[this.counter].classList.remove(this.lShow);
+	this.slideArray[this.counter].classList.remove(this.rHide);
+	this.slideArray[this.counter].classList.add(this.lHide);
+	
+
+	var nextSlide = this.counter - 1;
+	if(nextSlide < 0) {
+		nextSlide = this.slideArray.length - 1;
+	};
+	this.slideArray[nextSlide].classList.remove(this.others);
+	this.slideArray[nextSlide].classList.remove(this.lHide);
+	this.slideArray[nextSlide].classList.remove(this.rHide);
+	this.slideArray[nextSlide].classList.remove(this.rShow);
+	this.slideArray[nextSlide].classList.add(this.lShow);
+
+	this.counter--;
+	if(this.counter < 0) {
+		this.counter = this.slideArray.length - 1;
 	};
 
-var callBackRightDiscount = rightButtonHeandler.bind(
-	this,
-	slidesDiscount,
-	rightButtonDiscount,
-	leftButtonDiscount,
-	slidesDiscount.counter
+	this.rButton.classList.add('hidden');
+	this.lButton.classList.add('activity');
+	this.lButton.removeEventListener('click', this.lHeandler);
+	
+	var slider = this;
+	setTimeout(function() {
+		slider.rButton.classList.remove('hidden');
+		slider.lButton.classList.remove('activity');
+		slider.lButton.addEventListener('click', slider.lHeandler);
+	}, slider.time);
+};
+
+window.Slider = Slider;
+
+})();
+
+
+/*ПОДКЛЮЧЕНИЕ СЛАЙДЕРА В БЛОКЕ DISCOUNT*/
+(function() {
+
+	var slider = new window.Slider(
+		document.querySelector('.discount-button--right'),
+		document.querySelector('.discount-button--left'),
+		document.querySelectorAll('.discount-slide-wrapper'),
+		'show-right',
+		'show-left',
+		'hide',
+		'hide',
+		'hidden',
+		500
 	);
-rightButtonDiscount.addEventListener('click', callBackRightDiscount);
-
-var callBackLeftDiscount = leftButtonHeandler.bind(this, slidesDiscount, leftButtonDiscount, rightButtonDiscount, slidesDiscount.counter);
-leftButtonDiscount.addEventListener('click', callBackLeftDiscount);
-
-
+	
+	slider.bindContext();
+	slider.hangHeandler();
+})();
 
 
 
-/*ПОВЕДЕНИЕ СЛАЙДЕРА В БЛОКЕ SET*/
-ANIMATION_TIME = 500;
-var rightButtonSet = document.querySelector('.set-button--right');
-var leftButtonSet = document.querySelector('.set-button--left');
-var slideSet = document.querySelectorAll('.set-wrapper');
-slideSet.counter = 0;
-console.log(document.querySelector('.set-button--right'));
 
-var callBackRightSet = rightButtonHeandler.bind(this, slideSet, rightButtonSet, leftButtonSet, slideSet.counter);
-rightButtonSet.addEventListener('click', callBackRightSet);
 
-var callBackLeftSet = leftButtonHeandler.bind(this, slideSet, leftButtonSet, rightButtonSet, slideSet.counter);
-leftButtonSet.addEventListener('click', callBackLeftSet);
+/*ПОДКЛЮЧЕНИЕ СЛАЙДЕРА В БЛОКЕ SET*/
+(function() {
+
+	var slider = new window.Slider(
+		document.querySelector('.set-button--right'),
+		document.querySelector('.set-button--left'),
+		document.querySelectorAll('.set-wrapper'),
+		'show-right',
+		'show-left',
+		'hide-set',
+		'hide-set',
+		'hidden',
+		500
+	);
+	
+	slider.bindContext();
+	slider.hangHeandler();
+})();
+
 
 
 
