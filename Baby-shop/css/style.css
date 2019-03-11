@@ -133,7 +133,7 @@ a:hover {
 	}
 }
 
-@media(min-width: 321px) {
+@media(min-width: 319px) {
 	.version {
 		color: blue;
 	}
