@@ -1,17 +1,9 @@
 ﻿body {
 	font-family: 'Montserrat', sans-serif;
-	font-weight: 500;
-	font-size: 26px;
+	font-weight: 300;
+	font-size: 12px;
 	color: black;
 	overflow: auto;
-}
-
-
-@media (min-width: 768px) {
-	.body {
-		font-weight: 300;
-		font-size: 15px;
-	}
 }
 
 :focus {
@@ -71,8 +63,8 @@ a:hover {
 	margin: 0 auto;
 	-webkit-box-sizing: border-box;
 	        box-sizing: border-box;
-	padding: 0 15px;
-	padding-top: 15px;
+	padding: 0 7px;
+	padding-top: 7px;
 }
 
 .version {
@@ -88,25 +80,25 @@ a:hover {
 	text-align: right;
 	text-decoration: none;
 	color: black;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 
 .social {
 	width: 50%;
-	padding-top: 20px;
+	padding-top: 6px;
 }
 
 .social__vk {
 	display: inline-block;
-	width: 58px;
-	height: 34px;
+	width: 29px;
+	height: 17px;
 }
 
 .social__instagram {
 	display: inline-block;
-	width: 34px;
-	height: 34px;
-	margin-left: 30px;
+	width: 17px;
+	height: 17px;
+	margin-left: 15px;
 }
 
 .social__vk::before {
@@ -127,27 +119,9 @@ a:hover {
 	background-size: cover;
 }
 
-@media(min-width: 200px) {
-	.version {
-		color: yellow;
-	}
-}
-
-@media(min-width: 319px) {
-	.version {
-		color: blue;
-	}
-}
-
 @media(min-width: 426px) {
 	.version {
 		color: red;
-	}
-}
-
-@media(min-width: 700px) {
-	.version {
-		color: green;
 	}
 }
 
@@ -161,17 +135,17 @@ a:hover {
 .user-navigation {
 	width: 50%;
 	text-align: right;
-	margin-bottom: 30px;
+	margin-bottom: 15px;
 }
 
 .user-navigation__item {
 	position: relative;
 	display: inline-block;
-	width: 70px;
-	height: 70px;
+	width: 28px;
+	height: 28px;
 	border-radius: 50%;
 	background: #f4f7f8;
-	margin-left: 10px;
+	margin-left: 5px;
 }
 
 .user-navigation__login {
@@ -180,11 +154,11 @@ a:hover {
 
 .user-navigation__login::before {
 	position: absolute;
-	top: 4px;
-	left: 2px;
+	top: 1px;
+	left: 0px;
 	content: "";
-	width: 66px;
-	height: 66px;
+	width: 28px;
+	height: 28px;
 	background: url(../images/icons/user.png) no-repeat;
 	background-size: cover;
 }
@@ -195,11 +169,11 @@ a:hover {
 
 .user-navigation__login--active::before{
 	position: absolute;
-	top: 0;
-	left: 2px;
+	top: -1px;
+	left: 0px;
 	content: "";
-	width: 66px;
-	height: 66px;
+	width: 28px;
+	height: 28px;
 	background: url(../images/icons/user-activ.png) no-repeat;
 	background-size: cover;
 }
@@ -210,59 +184,59 @@ a:hover {
 
 .user-navigation__likes::before {
 	position: absolute;
-	top: 13px;
-	left: 12px;
+	top: 6px;
+	left: 5px;
 	content: "";
-	width: 46px;
-	height: 46px;
+	width: 18px;
+	height: 18px;
 	background: url(../images/icons/heart.png) no-repeat;
 	background-size: cover;
 }
 
 .user-navigation__likes:hover::before {
 	position: absolute;
-	top: 13px;
-	left: 12px;
+	top: 5.5px;
+	left: 5px;
 	content: "";
-	width: 46px;
-	height: 46px;
+	width: 18px;
+	height: 18px;
 	background: url(../images/icons/heart-activ.png) no-repeat;
 	background-size: cover;
 }
 
 .user-navigation__basket::before {
 	position: absolute;
-	top: 16px;
-	left: 16px;
+	top: 7px;
+	left: 6px;
 	content: "";
-	width: 36px;
-	height: 36px;
+	width: 14px;
+	height: 14px;
 	background: url(../images/icons/basket.png) no-repeat;
 	background-size: cover;
 }
 
 .user-navigation__basket:hover::before {
 	position: absolute;
-	top: 16px;
-	left: 16px;
+	top: 7px;
+	left: 6px;
 	content: "";
-	width: 36px;
-	height: 36px;
+	width: 14px;
+	height: 13px;
 	background: url(../images/icons/basket-activ.png) no-repeat;
 	background-size: cover;
 }
 
 .user-navigation__value {
 	position: absolute;
-	top: 35px;
-	right: 35px;
-	width: 40px;
-	height: 40px;
+	top: 18px;
+	right: 18px;
+	width: 16px;
+	height: 16px;
 	background: #689418;
-	font-size: 20px;
+	font-size: 8px;
 	font-weight: 700;
 	text-align: center;
-	padding-top: 10px;
+	padding-top: 4px;
 	-webkit-box-sizing: border-box;
 	        box-sizing: border-box;
 	color: black;
@@ -521,9 +495,9 @@ a:hover {
 
 .logo-header {
 	display: block;
-	width: 140px;
+	width: 60px;
 	position: absolute;
-	top: -150px;
+	top: -85px;
 	left: 50%;
 	-webkit-transform: translate(-50%, 0);
 	    -ms-transform: translate(-50%, 0);
@@ -1377,7 +1351,7 @@ a:hover {
 	-ms-flex-preferred-size: 100%;
 	    flex-basis: 100%;
 	height: 100%;
-	margin: 0 15px;
+	margin: 0 7px;
 	-webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
 	        box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
 }
@@ -1385,7 +1359,7 @@ a:hover {
 .quote-cart__image-wrapper {
 	width: 30%;
 	border-radius: 50%;
-	margin: 20px auto;
+	margin: 10px auto;
 	overflow: hidden;
 }
 
@@ -1400,16 +1374,16 @@ a:hover {
 
 .qoute-cart__text {
 	display: block;
-	font-size: 16px;
-	padding: 0 20px;
+	font-size: 8px;
+	padding: 0 10px;
 }
 
 .quote-cart__icon {
 	display: block;
 	position: relative;
-	width: 50px;
-	height: 39px;
-	margin: 20px auto;
+	width: 25px;
+	height: 19px;
+	margin: 10px auto;
 }
 
 .quote-cart__icon::before {
@@ -1461,12 +1435,12 @@ a:hover {
 .blog-cart__title {
 	margin: 0;
 	padding-bottom: 5px;
-	font-size: 24px;
+	font-size: 12px;
 }
 
 .blog-cart__data {
 	margin: 0;
-	font-size: 20px;
+	font-size: 10px;
 }
 
 .blog-link {
@@ -1475,6 +1449,12 @@ a:hover {
 	color: black;
 	padding-top: 20px;
 }
+
+
+
+
+
+
 
 .main-footer {
 	background: #e8ecef;
@@ -1496,13 +1476,12 @@ a:hover {
 	    align-content: space-between;
 	position: relative;
 	margin: 0 auto;
-	padding: 0 15px;
-	height: 260px;	
+	padding: 0 15px;	
 }
 
 .logo-footer {
 	display: block;
-	width: 80px;
+	width: 40px;
 }
 
 .pay {
@@ -1512,8 +1491,8 @@ a:hover {
 
 .pay__item {
 	display: inline-block;
-	width: 52px;
-	height: 39px;
+	width: 26px;
+	height: 19px;
 }
 
 .pay--visa::before {
@@ -1546,7 +1525,7 @@ a:hover {
 .footer-wrapper > a {
 	text-decoration: none;
 	color: black;
-	font-size: 20px;
+	font-size: 10px;
 	margin: 8px 0;
 }
 
@@ -1571,6 +1550,12 @@ a:hover {
 .adout, .policy, .backup, .map, .contact, .webmaster {
 	text-align: right;
 }
+
+
+
+
+
+
 
 .hidden {
 	display: none;
