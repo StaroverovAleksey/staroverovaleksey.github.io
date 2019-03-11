@@ -1,9 +1,17 @@
-body {
+﻿body {
 	font-family: 'Montserrat', sans-serif;
 	font-weight: 500;
 	font-size: 26px;
 	color: black;
 	overflow: auto;
+}
+
+
+@media (min-width: 768px) {
+	.body {
+		font-weight: 300;
+		font-size: 15px;
+	}
 }
 
 :focus {
@@ -36,6 +44,16 @@ a:hover {
 	font-size: 20px;
 	cursor: pointer;
 }
+
+
+
+
+
+/* ШАПКА */
+
+
+
+
 
 .main-header {
 	position: relative;
@@ -108,6 +126,37 @@ a:hover {
 	background: url(../images/icons/instagram.png) no-repeat;
 	background-size: cover;
 }
+
+@media(min-width: 200px) {
+	.version {
+		color: yellow;
+	}
+}
+
+@media(min-width: 321px) {
+	.version {
+		color: blue;
+	}
+}
+
+@media(min-width: 426px) {
+	.version {
+		color: red;
+	}
+}
+
+@media(min-width: 700px) {
+	.version {
+		color: green;
+	}
+}
+
+
+/* ПОЛЬЗОВАТЕЛЬСКАЯ НАВИГАЦИЯ */
+
+
+
+
 
 .user-navigation {
 	width: 50%;
