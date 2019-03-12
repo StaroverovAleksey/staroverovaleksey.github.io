@@ -378,11 +378,11 @@ Slider.prototype.rHeandler = rightButtonHeandler;              /*Обработ�
 Slider.prototype.lHeandler = leftButtonHeandler;               /*Обработчик на левой кнопке*/
 Slider.prototype.bindContext = function() {    	               /*Привязка обработчиков к контексту*/
 	this.rHeandler = this.rHeandler.bind(this);
-	this.lHeandler = this.lHeandler.bind(this);  
+	this.lHeandler = this.lHeandler.bind(this);
 };
 Slider.prototype.hangHeandler = function() {                   /*Установка обработчиков на кнопки*/
-	this.rButton.addEventListener('click', this.rHeandler);
-	this.lButton.addEventListener('click', this.lHeandler);
+	this.rButton.addEventListener('mousedown', this.rHeandler);
+	this.lButton.addEventListener('mousedown', this.lHeandler);
 };
 	
 
@@ -426,13 +426,13 @@ function rightButtonHeandler(evt) {
 
 	this.lButton.classList.add('hidden');
 	this.rButton.classList.add('activity');
-	this.rButton.removeEventListener('click', this.rHeandler);
+	this.rButton.removeEventListener('mousedown', this.rHeandler);
 		
 	var slider = this;
 	setTimeout(function() {
 		slider.lButton.classList.remove('hidden');
 		slider.rButton.classList.remove('activity');
-		slider.rButton.addEventListener('click', slider.rHeandler);
+		slider.rButton.addEventListener('mousedown', slider.rHeandler);
 	}, slider.time);
 };
 
@@ -474,13 +474,13 @@ function leftButtonHeandler(evt) {
 
 	this.rButton.classList.add('hidden');
 	this.lButton.classList.add('activity');
-	this.lButton.removeEventListener('click', this.lHeandler);
+	this.lButton.removeEventListener('mousedown', this.lHeandler);
 	
 	var slider = this;
 	setTimeout(function() {
 		slider.rButton.classList.remove('hidden');
 		slider.lButton.classList.remove('activity');
-		slider.lButton.addEventListener('click', slider.lHeandler);
+		slider.lButton.addEventListener('mousedown', slider.lHeandler);
 	}, slider.time);
 };
 
