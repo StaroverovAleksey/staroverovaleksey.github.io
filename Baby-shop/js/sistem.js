@@ -144,7 +144,12 @@ var closeMenuHeandler = function() {
 	};
 };
 
-openMenuButton.addEventListener('click', openMenuHeandler);
+if(document.documentElement.clientWidth < 1024) {
+	openMenuButton.addEventListener('click', openMenuHeandler);
+} else {
+	menu.style.height = 'auto';
+}
+
 
 
 
@@ -204,9 +209,12 @@ userMenu.openUserMenuHeandler = function() {
 	};
 
 	if(userMenu.cButton.classList.contains('navigation-button--active')) {
-		closeMenuHeandler();
+		
 		search.clodeSearchHeandler();
 		setTimeout(open, 500);
+		if(document.documentElement.clientWidth < 1024) {
+			closeMenuHeandler();
+		};	
 	}  else {
 		open();
 	};
@@ -217,6 +225,9 @@ userMenu.openUserMenuHeandler = function() {
 		userMenu.cButton.classList.add('navigation-button--active');
 		document.querySelector('.search-button').classList.add('hidden');
 		document.querySelector('.filter-button').classList.add('hidden');
+		if(document.documentElement.clientWidth > 1023) {
+			userMenu.cButton.style.display = 'block';	
+		};
 	};
 
 	userMenu.forgetButton.addEventListener('click', userMenu.openForgetHeandler);
@@ -235,6 +246,9 @@ userMenu.closeUserMenuHeandler = function() {
 	userMenu.cButton.classList.remove('navigation-button--active');
 	document.querySelector('.search-button').classList.remove('hidden');
 	document.querySelector('.filter-button').classList.remove('hidden');
+	if(document.documentElement.clientWidth > 1023) {
+		userMenu.cButton.style.display = 'none';	
+	};
 	setTimeout(function() {
 		userMenu.reg.classList.add('hidden');
 		userMenu.reg.style.opacity = '0';
@@ -282,6 +296,10 @@ search.openSearchHeandler = function() {
 	search.cButton.classList.add('navigation-button--active');
 	document.querySelector('.search-button').classList.add('hidden');
 	document.querySelector('.filter-button').classList.add('hidden');
+	if(document.documentElement.clientWidth > 1023) {
+		search.cButton.style.display = 'block';
+	};
+	
 
 	window.addEventListener('scroll', search.ScrollHeandler);
 	search.oButton.removeEventListener('click', search.openSearchHeandler);
@@ -294,6 +312,10 @@ search.clodeSearchHeandler = function() {
 	search.cButton.classList.remove('navigation-button--active');
 	document.querySelector('.search-button').classList.remove('hidden');
 	document.querySelector('.filter-button').classList.remove('hidden');
+	if(document.documentElement.clientWidth > 1023) {
+		search.cButton.style.display = 'none';
+	};
+	
 	setTimeout(function(){
 		search.menu.style.top = null;
 		search.menu.style.position = null;
