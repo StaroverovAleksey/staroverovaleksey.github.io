@@ -221,12 +221,14 @@ userMenu.openUserMenuHeandler = function() {
 
 	function open() {
 		userMenu.menu.style.height = userMenu.menu.children[0].offsetHeight + 'px';
-		userMenu.menu.style.top = document.querySelector('.main-header').offsetHeight + 'px';
+		userMenu.menu.style.top = document.querySelector('.main-header').offsetHeight - document.querySelector('.main-navigation__category-list').offsetHeight + 'px';
 		userMenu.cButton.classList.add('navigation-button--active');
 		document.querySelector('.search-button').classList.add('hidden');
 		document.querySelector('.filter-button').classList.add('hidden');
 		if(document.documentElement.clientWidth > 1023) {
-			userMenu.cButton.style.display = 'block';	
+			setTimeout (function() {
+				userMenu.cButton.style.display = 'block';
+			}, 500);	
 		};
 	};
 
@@ -297,7 +299,9 @@ search.openSearchHeandler = function() {
 	document.querySelector('.search-button').classList.add('hidden');
 	document.querySelector('.filter-button').classList.add('hidden');
 	if(document.documentElement.clientWidth > 1023) {
-		search.cButton.style.display = 'block';
+		setTimeout(function() {
+			search.cButton.style.display = 'block';
+		}, 500);
 	};
 	
 
