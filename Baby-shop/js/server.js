@@ -1,4 +1,102 @@
-window.productList = [
+/*ОТПРАВКА ДАННЫХ ИЗ ФОРМ*/
+
+URL = 'PHP/clientData.php';
+
+var uploadData = {
+	form: document.querySelectorAll('.admin-form'),
+	submit: document.querySelectorAll('.submit-button'),
+	status: document.querySelectorAll('.submit-status'),
+	statusSql: document.querySelectorAll('.sql-status'),
+	numberForm: 0
+};
+
+xhrHeandler = function(evt, status) {
+	if(this.status == 200) {
+		uploadData.status[uploadData.numberForm].textContent = 'Данные отправлены';
+		uploadData.status[uploadData.numberForm].style.padding = '0 0 10px 0';
+		uploadData.status[uploadData.numberForm].style.color = 'green';
+		uploadData.form[uploadData.numberForm].reset();
+		inputFile.subscribe[uploadData.numberForm].textContent = null;
+		inputFile.subscribeInvalid[uploadData.numberForm].textContent = null;
+		uploadData.form[uploadData.numberForm].parentElement.parentElement.style.border = '1px solid green';
+		uploadData.statusSql[uploadData.numberForm].innerHTML = this.response;
+		if(uploadData.statusSql[uploadData.numberForm].innerHTML) {
+			uploadData.statusSql[uploadData.numberForm].style.padding = '0 0 10px 0';
+			uploadData.status[uploadData.numberForm].textContent = null;
+			uploadData.status[uploadData.numberForm].style.padding = null;
+		};
+	} else {
+		uploadData.status[uploadData.numberForm].textContent = 'Ошибка ' + this.status;
+		uploadData.status[uploadData.numberForm].style.padding = '0 0 10px 0';
+		uploadData.status[uploadData.numberForm].style.color = 'red';
+		uploadData.form[uploadData.numberForm].parentElement.parentElement.style.border = '1px solid red';
+	};
+};
+
+submitHeandler = function(evt) {
+	event.preventDefault();
+	for(var i = 0; i < uploadData.form.length; i++) {
+		if(evt.target === uploadData.submit[i]) {
+			var data = new FormData(uploadData.form[i]);
+			uploadData.numberForm = [i];
+		};
+	};
+	var xhr = new XMLHttpRequest();
+	
+	
+	xhr.addEventListener('load', xhrHeandler);
+
+	xhr.open('POST', URL);
+	xhr.send(data);
+};
+
+for(var i = 0; i < uploadData.form.length; i++) {
+	uploadData.submit[i].addEventListener('click', submitHeandler);
+};
+
+/*СБРОС СТАТУСОВ*/
+
+windowHeandler = function(evt) {
+	for(var i = 0; i < uploadData.form.length; i++) {
+		uploadData.status[i].textContent = null;
+		uploadData.status[i].style.padding = null;
+		uploadData.form[i].parentElement.parentElement.style.border = null;
+		uploadData.statusSql[uploadData.numberForm].innerHTML = null;
+		uploadData.statusSql[uploadData.numberForm].style.padding = null;
+	};
+};
+
+window.addEventListener('click', windowHeandler);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*window.productList = [
 	{name:
 		'Двусторонний плед',
 	photosLow: 
@@ -613,4 +711,4 @@ window.productList = [
 			rating: 3
 		}]
 	},
-];
+];*/

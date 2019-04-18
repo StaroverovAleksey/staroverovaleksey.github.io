@@ -3033,3 +3033,262 @@ a:hover {
 		padding: 20px 15px;
 	}
 }
+
+
+
+
+
+
+
+/* АДМИНКА */
+
+.admin-content {
+	padding-top: 2px;
+}
+
+.admin-section {
+	display: block;
+	width: 76%;
+	margin: 0 auto;
+	margin-bottom: 5px;
+	border: 1px solid #dfe1e5;
+	border-radius: 18px;
+	background: white;
+	overflow: hidden;
+}
+
+.admin-section--active, .admin-section:hover {
+	-webkit-box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
+	        box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
+	border-color: white;
+}
+
+.admin-button {
+	display: block;
+	width: 100%;
+	padding: 12px;
+	border: none;
+	background: white;
+	font-size: 10px;
+	font-weight: 500;
+	text-transform: uppercase;
+	cursor: pointer;
+	margin-bottom: 5px;
+}
+
+.admin-section--active .admin-button {
+	background: #f1f3f4;
+}
+
+@media (min-width: 1024px) {
+	.admin-content {
+		padding-top: 10px;
+	}
+	.admin-section {
+		border-radius: 24px;
+		width: 30%;
+		margin-bottom: 10px;
+	}
+
+	.admin-button {
+		font-size: 12px;
+		font-weight: 600;
+		padding: 16px;
+		margin-bottom: 10px;
+	}
+}
+
+
+
+
+.menu-redact__list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.menu-redact__item {
+	display: block;
+	margin: 0 auto;
+	margin-bottom: 5px;
+	width: 76%;
+	border: 1px solid #dfe1e5;
+	border-radius: 16px;
+	overflow: hidden;
+}
+
+.menu-redact__item:nth-child(3) {
+	margin-bottom: 15px;
+}
+
+.menu-redact__item:hover {
+	-webkit-box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
+	        box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
+	border-color: white;
+}
+
+.menu-reduct__title {
+	display: block;
+	width: 100%;
+	font-size: 10px;
+	text-transform: uppercase;
+	border: none;
+	background: white;
+	padding: 5px 0;
+	cursor: pointer;
+	margin-bottom: 10px;
+}
+
+.admin-section--active > .menu-reduct__title {
+	background: #f1f3f4;
+}
+
+@media (min-width: 768px) {
+	.menu-redact__item  {
+		margin-bottom: 10px;
+		width: 30%;
+	}
+
+	.menu-reduct__title {
+		padding: 10px 0;
+		font-size: 12px;
+	}
+
+	.menu-redact__item:nth-child(3) {
+		margin-bottom: 25px;
+	}
+}
+
+.admin-content input {
+	display: block;
+	width: 140px;
+	height: 26px;
+	margin-bottom: 10px;
+	border: none;
+	border-radius: 20px;
+	padding-left: 10px;
+	font-size: 16px;
+	background: #f1f3f4;
+}
+
+.admin-content input:hover {
+	background: #e8eaed;
+}
+
+.admin-content input:focus {
+	background: white;
+	-webkit-box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
+	        box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
+}
+
+.admin-content input:focus::-webkit-input-placeholder {
+	font-size: 0;	
+}
+
+.admin-content input:focus:-ms-input-placeholder {
+	font-size: 0;	
+}
+
+.admin-content input:focus::-ms-input-placeholder {
+	font-size: 0;	
+}
+
+.admin-content input:focus::placeholder {
+	font-size: 0;	
+}
+
+
+.menu-redact__add-category {
+	width: 100%;
+}
+
+.add-category__form {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+}
+
+.admin-form p {
+	display: block;
+	margin: 0;
+	text-align: center;
+}
+
+.admin-upload label {
+	display: block;
+	max-width: 135px;
+	padding: 6px 30px;
+	border: 1px solid #dfe1e5;
+	border-radius: 20px;
+	text-transform: uppercase;
+	font-size: 10px;
+	font-weight: 500;
+	margin-bottom: 3px;
+	cursor: pointer;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+	margin: 0 auto;
+}
+
+.admin-upload label:hover {
+	-webkit-box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
+	        box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
+	border-color: white;
+}
+
+.admin-upload label:active {
+	-webkit-box-shadow: inset 0 1px 6px 0 rgba(32,33,36,0.28);
+	        box-shadow: inset 0 1px 6px 0 rgba(32,33,36,0.28);
+}
+
+.add-category__foto-name {
+	font-weight: 400;
+}
+
+.add-category__submit {
+	margin: 10px 0;
+	padding: 7px 26px;
+}
+
+.submit-status {
+	font-weight: 600;
+}
+
+.admin-upload__subscribe {
+	color: green;
+	font-weight: 600;
+}
+
+.admin-upload__invalid, .sql-status {
+	color: red;
+	font-weight: 600;
+}
+
+@media(min-width: 768px) {
+	.admin-content input {
+		width: 200px;
+		height: 32px;
+	}
+
+	.admin-upload label {
+		padding: 8px 30px;
+		font-size: 14px;
+	}
+
+	.add-category__submit {
+		padding: 10px 26px;
+	}
+}
+
+
+
+
+
+
