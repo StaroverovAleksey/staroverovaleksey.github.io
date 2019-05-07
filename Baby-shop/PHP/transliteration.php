@@ -1,4 +1,14 @@
 <?php
+require 'connect_info.php';
+
+function connect() {
+    $ADR = 'localhost';
+    $USER = 'root';
+    $PASS = '';
+    $BD = 'michai84_baby';
+    return $connect = mysqli_connect($ADR, $USER, $PASS, $BD);
+}
+
 function translit($string) {
     $converter = array(
         'а' => 'a',   'б' => 'b',   'в' => 'v',
@@ -45,4 +55,24 @@ function getDirectory($file, $name) {
     $format = $pathinfo['extension'];
     $directory = '../images/menu/' . translit($name) . '.' . $format;
     return $directory;
+};
+
+function verif_string($string) {
+    $html_verif = htmlspecialchars($string, ENT_QUOTES);
+    $sql_verif = mysqli_real_escape_string(connect(), $html_verif);
+    return $sql_verif;
+};
+
+function sql_request($callback, $sql) {
+    connect();
+    if (mysqli_connect_error()) {
+        $errorConnect = 'Ошибка соединения:</br>' . mysqli_connect_error();
+    } else {
+        $result = mysqli_query(connect(), $sql);
+        if($result) {
+            $callback;
+        } else {
+            $errorConnect = 'Ошибка SQL запроса:</br>' . mysqli_error(connect());
+        };
+    };
 };

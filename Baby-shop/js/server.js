@@ -1,40 +1,105 @@
 /*ОТПРАВКА ДАННЫХ ИЗ ФОРМ*/
 
 URL = 'PHP/clientData.php';
+URL_SPOT = 'PHP/spotAjax.php';
+URL_DEL_CATEGORY = 'PHP/delCategoryAjax.php';
 
 var uploadData = {
 	form: document.querySelectorAll('.admin-form'),
 	submit: document.querySelectorAll('.submit-button'),
 	status: document.querySelectorAll('.submit-status'),
 	statusSql: document.querySelectorAll('.sql-status'),
-	numberForm: 0
+	numberForm: [0]
 };
 
+updateSpot = function() {
+	document.querySelector('.add-category__label-info').textContent = this.response;
+};
+
+updateDelCategory = function() {
+	var jsonParse = JSON.parse(this.response);
+	var result = [];
+	for(var i = 0; i < jsonParse.length; i++) {
+		result[i] = jsonParse[i][0];
+	};
+
+	var delWrapper = document.querySelector('.chose__label-wrapper');
+	var delCategories = document.querySelectorAll('.remove-category__chose-label');
+	var template = document.querySelector('.del-category__template').content;
+	var fragment = document.createDocumentFragment();
+	for(var i = 0; i < delCategories.length; i++) {
+		delWrapper.removeChild(delCategories[i]);
+	};
+
+	for(var i = 0; i < result.length; i++) {
+		var templateUse = template.cloneNode(true);
+		var templateInput = templateUse.querySelector('.remove-category__chose-input');
+		templateUse.querySelector('.remove-category__chose-label').insertAdjacentHTML('afterbegin', result[i]);
+		templateUse.querySelector('.remove-category__chose-input').name = result[i];
+		fragment.appendChild(templateUse);
+	};
+	delWrapper.appendChild(fragment);
+
+	var removeCategory = new menuWork(
+	document.querySelectorAll('.remove-category__chose'),
+	document.querySelectorAll('.remove-category__chose-button'),
+	document.querySelectorAll('.remove-category__chose-label'),
+	document.querySelectorAll('.remove-category__chose-input'),
+	);
+
+	removeCategory.bindContext();
+	removeCategory.hangHeandler();
+
+	spot.categories = document.querySelectorAll('.remove-category__chose-label');
+};
+
+updateXhr = function() {
+	var xhrSpot = new XMLHttpRequest();
+	xhrSpot.addEventListener('load', updateSpot);
+	xhrSpot.open('POST', URL_SPOT);
+	xhrSpot.send(null);
+
+	var xhrDelCategory = new XMLHttpRequest();
+	xhrDelCategory.addEventListener('load', updateDelCategory);
+	xhrDelCategory.open('POST', URL_DEL_CATEGORY);
+	xhrDelCategory.send(null);
+}
+
 xhrHeandler = function(evt, status) {
+	var formValue = uploadData.numberForm[0];
 	if(this.status == 200) {
-		uploadData.status[uploadData.numberForm].textContent = 'Данные отправлены';
-		uploadData.status[uploadData.numberForm].style.padding = '0 0 10px 0';
-		uploadData.status[uploadData.numberForm].style.color = 'green';
-		uploadData.form[uploadData.numberForm].reset();
-		inputFile.subscribe[uploadData.numberForm].textContent = null;
-		inputFile.subscribeInvalid[uploadData.numberForm].textContent = null;
-		uploadData.form[uploadData.numberForm].parentElement.parentElement.style.border = '1px solid green';
-		uploadData.statusSql[uploadData.numberForm].innerHTML = this.response;
-		if(uploadData.statusSql[uploadData.numberForm].innerHTML) {
-			uploadData.statusSql[uploadData.numberForm].style.padding = '0 0 10px 0';
-			uploadData.status[uploadData.numberForm].textContent = null;
-			uploadData.status[uploadData.numberForm].style.padding = null;
+		updateXhr();
+		loadMenu();
+		uploadData.status[formValue].textContent = 'Данные отправлены';
+		uploadData.status[formValue].style.padding = '0 0 10px 0';
+		uploadData.status[formValue].style.color = 'green';
+		uploadData.form[formValue].reset();
+		if(inputFile.subscribe[formValue]) {
+			inputFile.subscribe[formValue].textContent = null;
+			inputFile.subscribeInvalid[formValue].textContent = null;
+		};
+		uploadData.form[formValue].parentElement.parentElement.style.border = '1px solid green';
+		//uploadData.statusSql[formValue].innerHTML = this.response;
+		if(uploadData.statusSql[formValue].innerHTML) {
+			uploadData.statusSql[formValue].style.padding = '0 0 10px 0';
+			uploadData.status[formValue].textContent = null;
+			uploadData.status[formValue].style.padding = null;
 		};
 	} else {
-		uploadData.status[uploadData.numberForm].textContent = 'Ошибка ' + this.status;
-		uploadData.status[uploadData.numberForm].style.padding = '0 0 10px 0';
-		uploadData.status[uploadData.numberForm].style.color = 'red';
-		uploadData.form[uploadData.numberForm].parentElement.parentElement.style.border = '1px solid red';
+		uploadData.status[formValue].textContent = 'Ошибка ' + this.status;
+		uploadData.status[formValue].style.padding = '0 0 10px 0';
+		uploadData.status[formValue].style.color = 'red';
+		uploadData.form[formValue].parentElement.parentElement.style.border = '1px solid red';
 	};
 };
 
 submitHeandler = function(evt) {
 	event.preventDefault();
+
+	var spotNumber = document.querySelector('.add-category__label-info');
+	var spotInput = document.querySelector('.add-category__spot-input');
+	spotInput.value = Number(spotNumber.textContent);
+
 	for(var i = 0; i < uploadData.form.length; i++) {
 		if(evt.target === uploadData.submit[i]) {
 			var data = new FormData(uploadData.form[i]);
@@ -43,9 +108,7 @@ submitHeandler = function(evt) {
 	};
 	var xhr = new XMLHttpRequest();
 	
-	
 	xhr.addEventListener('load', xhrHeandler);
-
 	xhr.open('POST', URL);
 	xhr.send(data);
 };

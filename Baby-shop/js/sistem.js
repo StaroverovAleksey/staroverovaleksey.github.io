@@ -9,12 +9,13 @@ var searchButton = document.querySelector('.search-button');
 var filterButton = document.querySelector('.filter-button')
 var menu = document.querySelector('.main-navigation__category-list');
 var subcategory = document.querySelectorAll('.main-navigation__subcategory-list');
+var subcategoryWrapper = document.querySelectorAll('.main-navigation__subcategory-wrapper');
 var buttonWrapper = document.querySelector('.buttons-wrapper')
 var header = document.querySelector('.main-header__content-wrapper');
 var body = document.querySelector('body');
 var subcategoryIcon = document.querySelectorAll('.main-navigation__category-icon');
-var subcategorySize = document.querySelector('.main-navigation__subcategory-link').offsetHeight;
-var categorySize =document.querySelector('.main-navigation__category-item').offsetHeight;
+var categorySize =document.querySelector('.main-navigation__category-item');
+var subcategorySize = document.querySelectorAll('.main-navigation__subcategory-link');
 
 /*Функция возвращает координаты блока element*/
 var getPosition = function(element) {
@@ -71,8 +72,7 @@ var openSubcategoryHeandler = function(evt) {
 		openCategoryButton[i].addEventListener('click', openSubcategoryHeandler);
 		if(evt.target.localName === 'span') {
 			if(openCategoryButton[i] == evt.target.parentElement) {
-				
-				subcategory[i].style.height = ((subcategory[i].children.length -1) * subcategorySize) + 'px';
+				subcategory[i].style.height = ((subcategoryWrapper[i].children.length) * subcategorySize[0].offsetHeight) + 'px';
 				menu.style.height = parseInt(menu.style.height) + parseInt(subcategory[i].style.height) + 'px';
 				openCategoryButton[i].parentElement.style.color = '#e23709';
 				openCategoryButton[i].classList.add('rotate');
@@ -82,8 +82,7 @@ var openSubcategoryHeandler = function(evt) {
 			};
 		} else {
 			if(openCategoryButton[i] == evt.target) {
-
-				subcategory[i].style.height = ((subcategory[i].children.length -1) * subcategorySize) + 'px';
+				subcategory[i].style.height = ((subcategoryWrapper[i].children.length) * subcategorySize[0].offsetHeight) + 'px';
 				menu.style.height = parseInt(menu.style.height) + parseInt(subcategory[i].style.height) + 'px';
 				openCategoryButton[i].parentElement.style.color = '#e23709';
 				openCategoryButton[i].classList.add('rotate');
@@ -105,7 +104,7 @@ var scrollHeandler = function() {
 
 /*Обработчик, открывающий главное меню, при нажатии на кнопку openMenuButton.*/
 var openMenuHeandler = function(evt) {
-	menu.style.height = ((menu.children.length) * categorySize) + 'px';
+	menu.style.height = ((menu.children.length) * categorySize.offsetHeight) + 'px';
 	if(getPosition(header).bottom < 0) {
 		menu.style.position = 'fixed';
 	};
