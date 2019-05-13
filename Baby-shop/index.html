@@ -9,6 +9,37 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+<template class="menu__template">
+		<li class="main-navigation__category-item">
+					<a class="main-navigation__category-link">
+						<button class="main-navigation__category-button">
+							<span class="main-navigation__category-icon"></span>
+						</button>
+					</a>
+					<ul class="main-navigation__subcategory-list hidden-menu">
+
+						<div class="main-navigation__subcategory-wrapper">
+
+						</div>
+
+						<li class="main-navigation__category-accent">
+							<img src="" alt="" class="main-navigation__accent-image" width="364">
+							<div class="main-navigation__accent-wrapper">
+								<span class="main-navigation__accent-signature"></span>
+							</div>
+						</li>
+
+					</ul>
+				</li>
+	</template>
+
+	<template class="subcategory__template">
+		<li class="main-navigation__subcategory-item">
+			<a href="#" class="main-navigation__subcategory-link"></a>
+		</li>
+	</template>
+
 	<header class="main-header">
 		<div class="main-header__content-wrapper">
 			<a href="#" class="version">
@@ -102,207 +133,13 @@
 				</div>		
 			<ul class="main-navigation__category-list">
 
-				<li class="main-navigation__category-item">
-					<a class="main-navigation__category-link">Овощи
-						<button class="main-navigation__category-button">
-							<span class="main-navigation__category-icon"></span>
-						</button>
-					</a>
-					<ul class="main-navigation__subcategory-list hidden-menu">
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Помидоры</a>
-						</li>
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Кукумбер</a>
-						</li>
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Кабачки</a>
-						</li>
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Картошка</a>
-						</li>
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Антошка</a>
-						</li>
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Лопата</a>
-						</li>
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Лопата</a>
-						</li>
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Лопата</a>
-						</li>
-						<li class="main-navigation__category-accent">
-							<img src="images/cart-2.png" alt="" class="main-navigation__accent-image" width="364">
-							<span class="main-navigation__accent-signature"></span>
-						</li>
-					</ul>
-				</li>
-
-				<li class="main-navigation__category-item">
-					<a href="#" class="main-navigation__category-link">Овощи
-						<button class="main-navigation__category-button">
-							<span class="main-navigation__category-icon"></span>
-						</button>
-					</a>
-					<ul class="main-navigation__subcategory-list hidden-menu">
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Помидоры</a>
-						</li>
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Кукумбер</a>
-						</li>
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Кабачки</a>
-						</li>
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Картошка</a>
-						</li>
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Антошка</a>
-						</li>
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Лопата</a>
-						</li>
-						<li class="main-navigation__category-accent">
-							<img src="images/cart-1.png" alt="" class="main-navigation__accent-image" width="364">
-							<span class="main-navigation__accent-signature"></span>
-						</li>
-					</ul>
-				</li>
-
-				<li class="main-navigation__category-item">
-					<a href="#" class="main-navigation__category-link">Овощи
-						<button class="main-navigation__category-button">
-							<span class="main-navigation__category-icon"></span>
-						</button>
-					</a>
-					<ul class="main-navigation__subcategory-list hidden-menu">
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Помидоры</a>
-						</li>
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Кукумбер</a>
-						</li>
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Кабачки</a>
-						</li>
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Картошка</a>
-						</li>
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Антошка</a>
-						</li>
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Лопата</a>
-						</li>
-						<li class="main-navigation__category-accent">
-							<img src="images/cart-3.png" alt="" class="main-navigation__accent-image" width="364">
-							<span class="main-navigation__accent-signature"></span>
-						</li>
-					</ul>
-				</li>
-
-				<li class="main-navigation__category-item">
-					<a href="#" class="main-navigation__category-link">Овощи
-						<button class="main-navigation__category-button">
-							<span class="main-navigation__category-icon"></span>
-						</button>
-					</a>
-					<ul class="main-navigation__subcategory-list hidden-menu">
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Помидоры</a>
-						</li>
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Кукумбер</a>
-						</li>
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Кабачки</a>
-						</li>
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Картошка</a>
-						</li>
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Антошка</a>
-						</li>
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Лопата</a>
-						</li>
-						<li class="main-navigation__category-accent">
-							<img src="images/cart-3.png" alt="" class="main-navigation__accent-image" width="364">
-							<span class="main-navigation__accent-signature"></span>
-						</li>
-					</ul>
-				</li>
-
-				<li class="main-navigation__category-item">
-					<a href="#" class="main-navigation__category-link">Овощи
-						<button class="main-navigation__category-button">
-							<span class="main-navigation__category-icon"></span>
-						</button>
-					</a>
-					<ul class="main-navigation__subcategory-list hidden-menu">
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Помидоры</a>
-						</li>
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Кукумбер</a>
-						</li>
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Кабачки</a>
-						</li>
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Картошка</a>
-						</li>
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Антошка</a>
-						</li>
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Лопата</a>
-						</li>
-						<li class="main-navigation__category-accent">
-							<img src="images/cart-2.png" alt="" class="main-navigation__accent-image" width="364">
-							<span class="main-navigation__accent-signature"></span>
-						</li>
-					</ul>
-				</li>
-
-				<li class="main-navigation__category-item">
-					<a href="#" class="main-navigation__category-link">Овощи
-						<button class="main-navigation__category-button">
-							<span class="main-navigation__category-icon"></span>
-						</button>
-					</a>
-					<ul class="main-navigation__subcategory-list hidden-menu">
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Помидоры</a>
-						</li>
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Кукумбер</a>
-						</li>
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Кабачки</a>
-						</li>
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Картошка</a>
-						</li>
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Антошка</a>
-						</li>
-						<li class="main-navigation__subcategory-item">
-							<a href="#" class="main-navigation__subcategory-link">Лопата</a>
-						</li>
-						<li class="main-navigation__category-accent">
-							<img src="images/cart-1.png" alt="" class="main-navigation__accent-image" width="364">
-							<span class="main-navigation__accent-signature"></span>
-						</li>
-					</ul>
-				</li>
 
 			</ul>
 		</nav>
 	</header>
+
+	<script src="js/render_menu.js"></script>
+
 	<main class="main-content">
 		<h1 class="site-name visually-hidden">Магазин детских вещей Baby-shop</h1>
 		<section class="buttons">
@@ -848,5 +685,6 @@
 	</footer>
 	<script src="js/sistem.js"></script>
 	<script src="js/server.js"></script>
+	<script src="js/titlePage.js"></script>
 </body>
 </html>

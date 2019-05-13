@@ -1,4 +1,4 @@
-URL_MENU_LOAD = 'PHP/menu_ajax.php'
+URL_MENU_LOAD = 'PHP/menu_ajax.php';
 
 renderMenu = function() {
 	var menu = {
@@ -19,17 +19,22 @@ renderMenu = function() {
 	for(var i =0; i < menuData.length; i++) {
 		templateCatUse = menu.templateCat.cloneNode(true);
 		templateCatUse.querySelector('.main-navigation__category-link').insertAdjacentHTML('afterbegin', menuData[i][1]);
+		templateCatUse.querySelector('.main-navigation__category-link').href = 'http://localhost/Baby-shop/list.php?category=' + menuData[i][0];
 		if(menuData[i][3] !== null) {
 			templateCatUse.querySelector('.main-navigation__accent-image').src = menuData[i][3];
 		};
 		if(menuData[i][2] !== null) {
 			templateCatUse.querySelector('.main-navigation__accent-signature').textContent = menuData[i][2];
+		} else {
+			templateCatUse.querySelector('.main-navigation__accent-wrapper').classList.add('hidden');
 		};
 		var menuDataSub = menuData[i][5];
+		var menuDataSubId = menuData[i][6];
 		if(menuDataSub) {
 			for(var j = 0; j < menuDataSub.length; j++) {
 				templateSubUse = menu.templateSub.cloneNode(true);
 				templateSubUse.querySelector('.main-navigation__subcategory-link').textContent = menuDataSub[j];
+				templateSubUse.querySelector('.main-navigation__subcategory-link').href = 'http://localhost/Baby-shop/list.php?category=' + menuData[i][0] + '&subcategory=' + menuDataSubId[j];
 				templateCatUse.querySelector('.main-navigation__subcategory-wrapper').appendChild(templateSubUse);
 			}; 
 		} else {
@@ -55,5 +60,4 @@ loadMenu = function() {
 	xhr.open('POST', URL_MENU_LOAD);
 	xhr.send(null);
 };
-
 loadMenu();

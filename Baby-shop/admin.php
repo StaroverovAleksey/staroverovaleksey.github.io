@@ -43,6 +43,12 @@
 		</li>
 	</template>
 
+	<template class="admin-upload__subscribe-template--multiple">
+		<label class="admin-upload__subscribe--multiple">
+			<input type="radio" class="admin-upload__subscribe-input--multiple visually-hidden" name="admin-upload__subscribe-input--multiple">
+		</label>
+	</template>
+
 	<header class="main-header">
 		<div class="main-header__content-wrapper">
 			<a href="#" class="version">
@@ -158,17 +164,96 @@
 
 		<section class="cart-redact admin-section">
 			<button class="cart-redact__button admin-button">Работа с карточками товара</button>
-			<form action="" class="cart-redact__form">
-				<div class="qwerty"></div>
-			</form>
+			<ul class="cart-redact_list">
+
+				<li class="cart-redact__item redact-item">
+					<button class="cart-redact__title admin-subbutton">Добавить товар</button>
+					<div class="cart-redact__add-cart">
+						<form action="PHP/clientData.php" method="post" enctype="multipart/form-data" class="add-cart__form admin-form">
+							<div class="add-cart__name-wrapper">
+								<input type="text" class="add-cart__name admin-input" placeholder="Название" name="add-cart__name">
+								<input type="text" class="add-cart__code admin-input" placeholder="Код" name="add-cart__code">
+							</div>
+							<div class="add-cart__prace-wrapper">
+								<input type="text" class="add-cart__new-price admin-input" placeholder="Цена" name="add-cart__new-price">
+								<label class="add-cart__sale-label admin-input">%
+									<input type="checkbox" class="add-cart__sale visually-hidden" name="add-cart__sale">
+								</label>
+								<input type="text" class="add-cart__old-price admin-input" placeholder="Цена %" name="add-cart__old-price">
+							</div>
+							<input type="text" class="add-cart__manufactured admin-input" placeholder="Производитель" name="add-cart__manufactured">
+							<input type="text" class="add-cart__material admin-input" placeholder="Материал" name="add-cart__material">
+							<textarea class="add-cart__discription admin-input" placeholder="Описание" name="add-cart__discription"></textarea>
+							<textarea class="add-cart__subscribe admin-input" placeholder="Информация" name="add-cart__subscribe"></textarea>
+							<div class="add-cart__foto admin-upload">
+								<p class="add-cart__foto-name">Загрузить фото</p>
+								<label class="add-cart__foto-label input-choise">Выбрать<input type="file" class="add-cart__foto-input visually-hidden upload-input--multiple" name="add-cart__foto[]" multiple></label>
+								<div class="admin-upload__subscribe-wrapper--multiple">
+									
+								</div>
+								<p class="admin-upload__invalid--multiple"></p>
+							</div>
+							<p class="add-cart__chose-category-subscribe">Выбрать категорию</p>
+							<div class="add-cart__chose-category chose-wrapper">
+								<button class="add-cart__chose-category-button chose__button">Выбрать</button>
+								<div class="add-cart__chose-category-wrapper">
+									<?php
+										foreach ($choseCategoryResult as $value) {
+											echo "<label class='add-cart__chose-category-label chose__label'>";
+											echo $value[0];
+											echo "<input type='radio' name='add-cart__chose-category-input'
+											class='add-cart__chose-category-input chose__input visually-hidden' value=";
+											echo "'$value[0]'";
+											echo "><p class='visually-hidden'>";
+											echo $value[1];
+											echo "</p></label>";
+										};
+									?>
+								</div>
+							</div>
+							<p class="add-cart__chose-category-discript"></p>
+							<p class="add-cart__chose-subcategory-subscribe visually-hidden">Выбрать подкатегорию</p>
+							<div class="add-cart__chose-subcategory chose-wrapper visually-hidden">
+								<button class="add-cart__chose-subcategory-button chose__button">Выбрать</button>
+								<div class="add-cart__chose-subcategory-wrapper">
+									<?php
+										foreach ($choseSubcategoryResult as $value) {
+											echo "<label class='add-cart__chose-subcategory-label chose__label visually-hidden'>";
+											echo $value[0];
+											echo "<input type='radio' name='add-cart__chose-subcategory-input' class='add-cart__chose-subcategory-input chose__input visually-hidden' value=";
+											echo "'$value[0]'";
+											echo "><p class='add-cart__chose-subcategory-id visually-hidden'>";
+											echo $value[1];
+											echo "</p></label>";
+										};
+									?>
+								</div>
+							</div>
+							<p class="add-cart__chose-subcategory-discript"></p>
+							<button class="add-cart__submit button submit-button">Добавить</button>
+							<p class="submit-status"></p>
+							<p class="sql-status">
+								<?php
+									print_r($errorConnect);
+								?>
+							</p>
+						</form>
+					</div>
+				</li>
+
+				<li class="cart-redact__item redact-item">
+					<button class="cart-redact__title admin-subbutton">Удалить товар</button>
+				</li>
+
+			</ul>
 		</section>
 
 		<section class="menu-redact admin-section">
 			<button class="menu-redact__button admin-button">Работа с меню</button>
 			<ul class="menu-redact__list">
 
-				<li class="menu-redact__item">
-					<button class="menu-reduct__title">Добавить категорию</button>
+				<li class="menu-redact__item redact-item">
+					<button class="menu-reduct__title admin-subbutton">Добавить категорию</button>
 					<div class="menu-redact__add-category">
 						<form action="PHP/clientData.php" method="post" enctype="multipart/form-data" class="add-category__form admin-form">
 							<div class="add-category__name-wrapper">
@@ -215,8 +300,8 @@
 					</div>
 				</li>
 
-				<li class="menu-redact__item">
-					<button class="menu-reduct__title">Удалить категорию</button>
+				<li class="menu-redact__item redact-item">
+					<button class="menu-reduct__title admin-subbutton">Удалить категорию</button>
 					<div class="menu-redact__remove-category">
 						<form action="PHP/clientData.php" method="post" enctype="multipart/form-data" class="remove-category__form admin-form">
 							<div class="remove-category__chose chose-wrapper">
@@ -224,7 +309,7 @@
 								<div class="chose__label-wrapper">
 									<?php
 										foreach ($delCategoryResult as $value) {
-											print '<label class="remove-category__chose-label chose__label">' . $value[0] . '<input type="checkbox" name=' . $value[0] . ' class="remove-category__chose-input chose__input visually-hidden"></label>';
+											print '<label class="remove-category__chose-label chose__label">' . $value[0] . '<input type="checkbox" name=' . $value[1] . ' class="remove-category__chose-input chose__input visually-hidden"></label>';
 										};
 									?>
 									<input type="checkbox" class="visually-hidden" name="remove-category" checked="checked">
@@ -232,46 +317,10 @@
 							</div>
 							<button class="remove-category__submit button submit-button">Удалить</button>
 							<p class="submit-status"></p>
-							<p class="sql-status"></p>
+							<p class="sql-status">
+							</p>
 						</form>
 					</div>
-				</li>
-
-				<li class="menu-redact__item">
-					<button class="menu-reduct__title">Переместить категорию</button>
-					<div class="menu-redact__move-category">
-						<form action="PHP/clientData.php" method="post" enctype="multipart/form-data" class="move-category__form admin-form">
-							<div class="move-category__chose chose-wrapper">
-								<button class="move-category__chose-button chose__button">Выбрать</button>
-								<div class="chose__label-wrapper">
-									<?php
-										foreach ($delCategoryResult as $value) {
-											print '<label class="move-category__chose-label chose__label">' . $value[0] . '<input type="checkbox" name=' . $value[0] . ' class="move-category__chose-input chose__input visually-hidden"></label>';
-										}
-									?>
-									<input type="checkbox" class="visually-hidden" name="move-category" checked="checked">
-								</div>
-							</div>
-							<button class="move-category__submit button submit-button">Переместить</button>
-							<p class="submit-status"></p>
-							<p class="sql-status"></p>
-						</form>
-					</div>
-				</li>
-
-				<li class="menu-redact__item">
-					<button class="menu-reduct__title">Добавить подкатегорию</button>
-					<div class="menu-redact__add-subcategory"></div>
-				</li>
-
-				<li class="menu-redact__item">
-					<button class="menu-reduct__title">Удалить подкатегорию</button>
-					<div class="menu-redact__remove-subcategory"></div>
-				</li>
-
-				<li class="menu-redact__item">
-					<button class="menu-reduct__title">Переместить подкатегорию</button>
-					<div class="menu-redact__move-subcategory"></div>
 				</li>
 
 			</ul>

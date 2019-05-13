@@ -19,8 +19,10 @@ updateSpot = function() {
 updateDelCategory = function() {
 	var jsonParse = JSON.parse(this.response);
 	var result = [];
+	var resultId = [];
 	for(var i = 0; i < jsonParse.length; i++) {
 		result[i] = jsonParse[i][0];
+		resultId[i] = jsonParse[i][1];
 	};
 
 	var delWrapper = document.querySelector('.chose__label-wrapper');
@@ -35,7 +37,7 @@ updateDelCategory = function() {
 		var templateUse = template.cloneNode(true);
 		var templateInput = templateUse.querySelector('.remove-category__chose-input');
 		templateUse.querySelector('.remove-category__chose-label').insertAdjacentHTML('afterbegin', result[i]);
-		templateUse.querySelector('.remove-category__chose-input').name = result[i];
+		templateUse.querySelector('.remove-category__chose-input').name = resultId[i];
 		fragment.appendChild(templateUse);
 	};
 	delWrapper.appendChild(fragment);
@@ -79,7 +81,12 @@ xhrHeandler = function(evt, status) {
 			inputFile.subscribeInvalid[formValue].textContent = null;
 		};
 		uploadData.form[formValue].parentElement.parentElement.style.border = '1px solid green';
-		//uploadData.statusSql[formValue].innerHTML = this.response;
+		console.log(this.response);
+		if(this.response == 'Категория не пуста') {
+			uploadData.statusSql[formValue].textContent = this.response;
+			uploadData.form[formValue].parentElement.parentElement.style.border = '1px solid red';
+		};
+		//console.log(this.response);
 		if(uploadData.statusSql[formValue].innerHTML) {
 			uploadData.statusSql[formValue].style.padding = '0 0 10px 0';
 			uploadData.status[formValue].textContent = null;

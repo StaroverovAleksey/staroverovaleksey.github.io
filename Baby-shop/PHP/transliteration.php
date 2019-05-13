@@ -1,13 +1,14 @@
 <?php
-require 'connect_info.php';
 
 function connect() {
     $ADR = 'localhost';
     $USER = 'root';
     $PASS = '';
     $BD = 'michai84_baby';
-    return $connect = mysqli_connect($ADR, $USER, $PASS, $BD);
-}
+    return $connectq = mysqli_connect($ADR, $USER, $PASS, $BD);
+};
+
+$connect = connect();
 
 function translit($string) {
     $converter = array(
@@ -20,7 +21,7 @@ function translit($string) {
         'с' => 's',   'т' => 't',   'у' => 'u',
         'ф' => 'f',   'х' => 'h',   'ц' => 'c',
         'ч' => 'ch',  'ш' => 'sh',  'щ' => 'sch',
-        'ь' => '\'',  'ы' => 'y',   'ъ' => '\'',
+        'ь' => '',  'ы' => 'y',   'ъ' => '',
         'э' => 'e',   'ю' => 'yu',  'я' => 'ya',
         
         'А' => 'A',   'Б' => 'B',   'В' => 'V',
@@ -32,7 +33,7 @@ function translit($string) {
         'С' => 'S',   'Т' => 'T',   'У' => 'U',
         'Ф' => 'F',   'Х' => 'H',   'Ц' => 'C',
         'Ч' => 'Ch',  'Ш' => 'Sh',  'Щ' => 'Sch',
-        'Ь' => '\'',  'Ы' => 'Y',   'Ъ' => '\'',
+        'Ь' => '',  'Ы' => 'Y',   'Ъ' => '',
         'Э' => 'E',   'Ю' => 'Yu',  'Я' => 'Ya',
     );
     return strtr($string, $converter);
@@ -54,6 +55,13 @@ function getDirectory($file, $name) {
     $pathinfo = pathinfo($file);
     $format = $pathinfo['extension'];
     $directory = '../images/menu/' . translit($name) . '.' . $format;
+    return $directory;
+};
+
+function getItemDirectory($file, $name, $n) {
+    $pathinfo = pathinfo($file);
+    $format = $pathinfo['extension'];
+    $directory = '../images/items/' . translit($name) . '/' . translit($name) . $n . '.' . $format;
     return $directory;
 };
 

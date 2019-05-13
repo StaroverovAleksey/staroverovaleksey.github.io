@@ -10,8 +10,10 @@ $subcategoryResult = mysqli_fetch_all($subcategoryQuery);
 $value = 0;
 foreach ($categoryResult as $cat) {
 	foreach ($subcategoryResult as $sub) {
-		if($cat[0] === $sub[2])
+		if($cat[0] === $sub[2]) {
 			$categoryResult[$value][5][] = $sub[1];
+			$categoryResult[$value][6][] = $sub[0];
+		};
 	};
 	$value++;
 };
