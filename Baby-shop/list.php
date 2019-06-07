@@ -55,8 +55,8 @@
 			<nav class="user-navigation">
 				<a href="#" class="user-navigation__login user-navigation__item"></a>
 				<a href="#" class="user-navigation__likes user-navigation__item"></a>
-				<a href="#" class="user-navigation__basket user-navigation__item">
-					<span class="user-navigation__value user-navigation__item">12</span>
+				<a href="basket.php" class="user-navigation__basket user-navigation__item">
+					<span class="user-navigation__value user-navigation__item"></span>
 				</a>
 				<div class="user-navigation__user-menu">
 
@@ -138,6 +138,7 @@
 	</header>
 
 	<script src="js/render_menu.js"></script>
+	<script src="js/getCookies.js"></script>
 	<script src="js/render_list.js"></script>
 
 	<main class="main-content list-content">
@@ -178,32 +179,32 @@
 
 	<template class="product-template">
 		<div class="product-item">
-					<span class="product-item__id visually-hidden"></span>
-					<span class="product-item__category visually-hidden"></span>
-					<span class="product-item__subcategory visually-hidden"></span>
-					<div class="product-item__foto-wrapper">
-						<img class="product-item__foto" src="images/pp003/low/5.jpg" alt="" width="100%">
-						<span class="product-item__discount"></span>
-						<span class="product-item__like"></span>
-					</div>
-					<div class="product-item__right-side">
-						<p class="product-item__name">Картошка</p>
-						<p class="product-item__price">
-							<span class="product-item__price-new">345</span>
-							<span class="product-item__price-old">567</span>
+			<span class="product-item__id visually-hidden"></span>
+			<span class="product-item__category visually-hidden"></span>
+			<span class="product-item__subcategory visually-hidden"></span>
+			<a class="product-item__foto-wrapper">
+				<img class="product-item__foto" src="images/pp003/low/5.jpg" alt="" width="100%">
+					<span class="product-item__discount"></span>
+					<span class="product-item__like"></span>
+			</a>
+			<div class="product-item__right-side">
+				<p class="product-item__name">Картошка</p>
+				<p class="product-item__price">
+					<span class="product-item__price-new">345</span>
+					<span class="product-item__price-old">567</span>
 							Руб
-						</p>
-						<div class="product-item__rating">
-							<span class="product-item__rating-item"></span>
-							<span class="product-item__rating-item"></span>
-							<span class="product-item__rating-item"></span>
-							<span class="product-item__rating-item"></span>
-							<span class="product-item__rating-item"></span>
-						</div>
-						<p class="product-item__discription">Picked from various organic farms when ripe and in season. Picked from various organic farms when ripe and in season. Picked from various.farms when ripe and in season. Picked from various.</p>	
-						<button class="product-item__button button">В корзину</button>
-					</div>
+				</p>
+				<div class="product-item__rating">
+					<span class="product-item__rating-item"></span>
+					<span class="product-item__rating-item"></span>
+					<span class="product-item__rating-item"></span>
+					<span class="product-item__rating-item"></span>
+					<span class="product-item__rating-item"></span>
 				</div>
+				<p class="product-item__discription">Picked from various organic farms when ripe and in season. Picked from various organic farms when ripe and in season. Picked from various.farms when ripe and in season. Picked from various.</p>	
+				<button class="product-item__button button">В корзину</button>
+			</div>
+		</div>
 	</template>
 
 	<footer class="main-footer">
@@ -231,5 +232,6 @@
 	</footer>
 	<script src="js/sistem.js"></script>
 	<script src="js/server.js"></script>
+	<script src="js/checkCookie.js"></script>
 </body>
 </html>

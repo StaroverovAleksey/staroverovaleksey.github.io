@@ -84,7 +84,6 @@ var openSubcategoryHeandler = function(evt) {
 	var subcategorySize = document.querySelectorAll('.main-navigation__subcategory-link');
 	
 	for(i = 0; i < openCategoryButton.length; i++) {
-		console.log(subcategory);
 		menu.style.height = parseInt(menu.style.height) - parseInt(subcategory[i].style.height) + 'px';
 		subcategory[i].style.height = '0px';
 		openCategoryButton[i].parentElement.style.color = 'white';

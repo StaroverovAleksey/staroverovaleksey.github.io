@@ -25,7 +25,7 @@ updateDelCategory = function() {
 		resultId[i] = jsonParse[i][1];
 	};
 
-	var delWrapper = document.querySelector('.chose__label-wrapper');
+	var delWrapper = document.querySelector('.chose__label-wrapper-del');
 	var delCategories = document.querySelectorAll('.remove-category__chose-label');
 	var template = document.querySelector('.del-category__template').content;
 	var fragment = document.createDocumentFragment();
@@ -67,10 +67,74 @@ updateXhr = function() {
 	xhrDelCategory.send(null);
 }
 
+fillRedactCartForm = function(data) {
+	document.querySelector('.redact-cart__id-two').value = data[0];
+	document.querySelector('.redact-cart__name-two').value = data[1];
+	document.querySelector('.redact-cart__code-two').value = data[2];
+	document.querySelector('.redact-cart__new-price-two').value = data[4];
+	document.querySelector('.redact-cart__old-price-two').value = data[3];
+	if(data[5]) {
+		document.querySelector('.redact-cart__sale-two').checked = true;
+		document.querySelector('.redact-cart__sale-label-two').classList.add('add-cart__sale--active');
+		document.querySelector('.redact-cart__old-price-two').classList.add('add-cart__old-price--hidden');
+	};
+	document.querySelector('.redact-cart__manufactured-two').value = data[6];
+	document.querySelector('.redact-cart__material-two').value = data[7];
+	document.querySelector('.redact-cart__discription-two').value = data[8];
+	document.querySelector('.redact-cart__subscribe-two').value = data[9];
+
+	var categoryList = document.querySelectorAll('.redact-cart__chose-category-label');
+	var subcategoryList = document.querySelectorAll('.redact-cart__chose-subcategory-label');
+	for(var i = 2; i < categoryList.length; i++) {
+		if(categoryList[i].innerText.split('\n')[0] === data[13]) {
+			document.querySelector('.redact-cart__chose-category-button-two').click();
+			categoryList[i].click();
+			document.querySelector('.redact-cart__chose-category-button-two').click();
+		};
+	};
+	for(var i = 2; i < subcategoryList.length; i++) {
+		if(subcategoryList[i].innerText.split('\n')[0] === data[14]) {
+			document.querySelector('.redact-cart__chose-subcategory-button-two').click();
+			subcategoryList[i].click();
+			document.querySelector('.redact-cart__chose-subcategory-button-two').click();
+		};
+	};
+
+	var fragment = document.createDocumentFragment();
+	var useFragment;
+	var mainPhoto = data[10].split('.')[0];
+	if(data[15]) {
+		for(var i = 2; i < data[15].length; i++) {
+			var usePhoto = data[15][i].split('.')[0];
+			useFragment = document.querySelector('.redact-cart__old-fhoto-template').content.cloneNode(true);
+			useFragment.querySelector('.template__photo-img').src = 'images/items/' + data[0] + '/360/' + data[15][i];
+			useFragment.querySelector('.admin-upload__subscribe-input--multiple').addEventListener('change', multipleRadioHeandler);
+			useFragment.querySelector('.admin-upload__subscribe-input--multiple').value = data[15][i];
+			if(mainPhoto === usePhoto) {
+				useFragment.querySelector('.template__photo-input').checked = true;
+				useFragment.querySelector('.admin-upload__subscribe--multiple').classList.add('admin-upload__subscribe--active');
+			};
+			fragment.appendChild(useFragment);
+		};	
+	};
+	document.querySelector('.redact-cart__old-fhoto-wrapper').appendChild(fragment);
+
+	var cancelButtons = document.querySelectorAll('.template__photo-cancel');
+	for(var i = 0; i <cancelButtons.length; i++) {
+		cancelButtons[i].addEventListener('mousedown', delPhotoHeandler);
+	};
+};
+
+fillRedactCategoryForm = function(data) {
+	document.querySelector('.redact-category__label-info').textContent = data[4];
+	document.querySelector('.redact-category__spot-input').value = data[4];
+	console.log(document.querySelector('.redact-category__spot-input').value);
+};
+
 xhrHeandler = function(evt, status) {
 	var formValue = uploadData.numberForm[0];
+	var formName = uploadData.form[formValue];
 	if(this.status == 200) {
-		updateXhr();
 		loadMenu();
 		uploadData.status[formValue].textContent = 'Данные отправлены';
 		uploadData.status[formValue].style.padding = '0 0 10px 0';
@@ -81,12 +145,58 @@ xhrHeandler = function(evt, status) {
 			inputFile.subscribeInvalid[formValue].textContent = null;
 		};
 		uploadData.form[formValue].parentElement.parentElement.style.border = '1px solid green';
-		console.log(this.response);
 		if(this.response == 'Категория не пуста') {
 			uploadData.statusSql[formValue].textContent = this.response;
 			uploadData.form[formValue].parentElement.parentElement.style.border = '1px solid red';
 		};
-		//console.log(this.response);
+		if(this.response == 'Минимальная сторона фотографии не менее 1200px') {
+			uploadData.statusSql[formValue].textContent = this.response;
+			uploadData.form[formValue].parentElement.parentElement.style.border = '1px solid red';
+		};
+		if(formName.classList.contains('redact-cart__form')) {
+			if(this.response =='Товар не найден') {
+				uploadData.statusSql[formValue].textContent = this.response;
+				uploadData.form[formValue].parentElement.parentElement.style.border = '1px solid red';
+			} else {
+				formName.classList.add('visually-hidden');
+				uploadData.form[formValue].parentElement.parentElement.style.border = 'none';
+				document.querySelector('.redact-cart__form-two').classList.remove('visually-hidden');
+				var formData = JSON.parse(this.response);
+				fillRedactCartForm(formData[0]);
+			};
+		};
+		if(formName.classList.contains('redact-category__form')) {
+			if(this.response == 'Категория не найдена') {
+				uploadData.statusSql[formValue].textContent = this.response;
+				uploadData.form[formValue].parentElement.parentElement.style.border = '1px solid red';
+			} else {
+				formName.classList.add('visually-hidden');
+				uploadData.form[formValue].parentElement.parentElement.style.border = 'none';
+				document.querySelector('.redact-category__form-two').classList.remove('visually-hidden');
+				var formData = JSON.parse(this.response);
+				fillRedactCategoryForm(formData);
+			};
+		};
+		if(formName.classList.contains('redact-cart__form-two')) {
+			if(this.response == 'Изменения внесены') {
+				uploadData.status[formValue - 1].textContent = this.response;
+			} else {
+				uploadData.statusSql[formValue - 1].textContent = this.response;
+			};
+		};
+		if(this.response == 'Категория удалена') {
+			updateXhr();
+			uploadData.status[formValue].textContent = this.response;
+			uploadData.form[formValue].parentElement.parentElement.style.border = '1px solid green';
+		};
+		if(this.response == 'Товар удален') {
+			uploadData.status[formValue].textContent = this.response;
+			uploadData.form[formValue].parentElement.parentElement.style.border = '1px solid green';
+		};
+		if(this.response == 'Товар не найден') {
+			uploadData.statusSql[formValue].textContent = this.response;
+			uploadData.form[formValue].parentElement.parentElement.style.border = '1px solid red';
+		};
 		if(uploadData.statusSql[formValue].innerHTML) {
 			uploadData.statusSql[formValue].style.padding = '0 0 10px 0';
 			uploadData.status[formValue].textContent = null;

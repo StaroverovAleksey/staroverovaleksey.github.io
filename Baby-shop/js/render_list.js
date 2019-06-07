@@ -52,8 +52,26 @@ renderList = function(data) {
 
 	for(var i =0; i < data.length; i++) {
 		useFragment = list.template.cloneNode(true);
+
+		if(data[i][7] !== 'empty') {
+			var screen = window.screen.width;
+			switch(true) {
+				case screen >= 420:
+			    var src = 'images/items/' + data[i][0] + '/560/' + data[i][7];
+			    break;
+
+				default:
+			    var src = 'images/items/' + data[i][0] + '/360/' + data[i][7];
+			    break;
+			};
+			useFragment.querySelector('.product-item__foto').src = src;
+		} else {
+			useFragment.querySelector('.product-item__foto').src = 'images/empty.png';
+		};
+		
+		useFragment.querySelector('.product-item__foto-wrapper').href = 'item.php?id=' + data[i][0];
 		useFragment.querySelector('.product-item__id').textContent = data[i][0];
-		useFragment.querySelector('.product-item__foto').src = data[i][7];
+		useFragment.querySelector('.product-item__button').id = data[i][0];
 		useFragment.querySelector('.product-item__name').textContent = data[i][1];
 		useFragment.querySelector('.product-item__price-new').textContent = data[i][2];
 		useFragment.querySelector('.product-item__price-old').textContent = data[i][3];
@@ -74,6 +92,12 @@ renderList = function(data) {
 		for(var j = 0; j < rating; j++) {
 			useFragment.querySelectorAll('.product-item__rating-item')[j].classList.add('product-item__rating-item--active');
 		};
+		basketHeandler = function() {
+			var id = event.target.id;
+			getCookies(id);
+		};
+		useFragment.querySelector('.product-item__button').addEventListener('mousedown', basketHeandler);
+
 		fragment.appendChild(useFragment);
 	};
 	list.container.appendChild(fragment);

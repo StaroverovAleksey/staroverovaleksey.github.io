@@ -7,9 +7,6 @@
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700&amp;subset=cyrillic" rel="stylesheet">
 	<link rel="stylesheet" href="css/Nolmalize.css">
 	<link rel="stylesheet" href="css/style.css">
-	<?php
-		require 'PHP/clientData.php';
-	?>
 </head>
 <body>
 
@@ -49,6 +46,20 @@
 		</label>
 	</template>
 
+	<template class="redact-cart__old-fhoto-template">
+		<div class="template__photo-wrapper">
+			<label class="admin-upload__subscribe--multiple">
+				<img  class="template__photo-img" src="#" alt="" width="85px">
+				<div class="template__photo-img-wrapper">
+				</div>
+				<input type="radio" class="template__photo-input admin-upload__subscribe-input--multiple visually-hidden" name="admin-upload__subscribe-input--multiple">
+			</label>
+			<div class="template__photo-cancel">
+				<span class="template__photo-cancel--span"></span>
+			</div>
+		</div>
+	</template>
+
 	<header class="main-header">
 		<div class="main-header__content-wrapper">
 			<a href="#" class="version">
@@ -64,8 +75,8 @@
 			<nav class="user-navigation">
 				<a href="#" class="user-navigation__login user-navigation__item"></a>
 				<a href="#" class="user-navigation__likes user-navigation__item"></a>
-				<a href="#" class="user-navigation__basket user-navigation__item">
-					<span class="user-navigation__value user-navigation__item">12</span>
+				<a href="basket.php" class="user-navigation__basket user-navigation__item">
+					<span class="user-navigation__value user-navigation__item"></span>
 				</a>
 				<div class="user-navigation__user-menu">
 
@@ -198,6 +209,7 @@
 								<button class="add-cart__chose-category-button chose__button">Выбрать</button>
 								<div class="add-cart__chose-category-wrapper">
 									<?php
+										require 'PHP/clientData.php';
 										foreach ($choseCategoryResult as $value) {
 											echo "<label class='add-cart__chose-category-label chose__label'>";
 											echo $value[0];
@@ -242,7 +254,113 @@
 				</li>
 
 				<li class="cart-redact__item redact-item">
+					<button class="cart-redact__title admin-subbutton">Изменить товар</button>
+					<div class="cart-redact__redact-cart">
+
+						<form action="PHP/clientData.php" method="post" enctype="multipart/form-data" class="redact-cart__form admin-form">
+							<input type="text" class="redact-cart__name admin-input" placeholder="Код товара" name="redact-cart__code">
+							<button class="redact-cart__submit button submit-button">Найти</button>
+							<p class="submit-status"></p>
+							<p class="sql-status">
+								<?php
+									print_r($errorConnect);
+								?>
+							</p>
+						</form>
+
+						<form action="PHP/clientData.php" method="post" enctype="multipart/form-data" class="redact-cart__form-two admin-form visually-hidden">
+							<input type="text" class="redact-cart__id-two admin-input visually-hidden" name="redact-cart__id-two">
+							<div class="redact-cart__name-wrapper">
+								<input type="text" class="redact-cart__name-two admin-input" placeholder="Название" name="redact-cart__name-two">
+								<input type="text" class="redact-cart__code-two admin-input" placeholder="Код" name="redact-cart__code-two">
+							</div>
+							<div class="redact-cart__prace-wrapper">
+								<input type="text" class="redact-cart__new-price-two admin-input" placeholder="Цена" name="redact-cart__new-price-two">
+								<label class="redact-cart__sale-label-two admin-input">%
+									<input type="checkbox" class="redact-cart__sale-two visually-hidden" name="redact-cart__sale-two">
+								</label>
+								<input type="text" class="redact-cart__old-price-two admin-input" placeholder="Цена %" name="redact-cart__old-price-two">
+							</div>
+							<input type="text" class="redact-cart__manufactured-two admin-input" placeholder="Производитель" name="redact-cart__manufactured-two">
+							<input type="text" class="redact-cart__material-two admin-input" placeholder="Материал" name="redact-cart__material-two">
+							<textarea class="redact-cart__discription-two admin-input" placeholder="Описание" name="redact-cart__discription-two"></textarea>
+							<textarea class="redact-cart__subscribe-two admin-input" placeholder="Информация" name="redact-cart__subscribe-two"></textarea>
+							<input type="text" class="redact-cart__old-fhoto-del visually-hidden" name="redact-cart__old-fhoto-del">
+							<div class="redact-cart__old-fhoto-wrapper">
+
+
+							</div>
+							<div class="redact-cart__foto admin-upload">
+								<p class="redact-cart__foto-name-two">Добавить фото</p>
+								<label class="redact-cart__foto-label-two input-choise">Выбрать<input type="file" class="redact-cart__foto-input-two  upload-input--multiple visually-hidden" name="add-cart__foto[]" multiple></label>
+								<div class="admin-upload__subscribe-wrapper--multiple">
+									
+								</div>
+								<p class="admin-upload__invalid--multiple"></p>
+							</div>
+							<p class="redact-cart__chose-category-subscribe-two">Выбрать категорию</p>
+							<div class="redact-cart__chose-category chose-wrapper">
+								<button class="redact-cart__chose-category-button-two chose__button">Выбрать</button>
+								<div class="redact-cart__chose-category-wrapper">
+									<?php
+										foreach ($choseCategoryResult as $value) {
+											echo "<label class='redact-cart__chose-category-label chose__label'>";
+											echo $value[0];
+											echo "<input type='radio' name='redact-cart__chose-category-input'
+											class='redact-cart__chose-category-input chose__input visually-hidden' value=";
+											echo "'$value[0]'";
+											echo "><p class='visually-hidden'>";
+											echo $value[1];
+											echo "</p></label>";
+										};
+									?>
+								</div>
+							</div>
+							<p class="redact-cart__chose-category-discript-two"></p>
+							<p class="redact-cart__chose-subcategory-subscribe-two visually-hidden">Выбрать подкатегорию</p>
+							<div class="redact-cart__chose-subcategory chose-wrapper visually-hidden">
+								<button class="redact-cart__chose-subcategory-button-two chose__button">Выбрать</button>
+								<div class="redact-cart__chose-subcategory-wrapper">
+									<?php
+										foreach ($choseSubcategoryResult as $value) {
+											echo "<label class='redact-cart__chose-subcategory-label chose__label visually-hidden'>";
+											echo $value[0];
+											echo "<input type='radio' name='redact-cart__chose-subcategory-input' class='redact-cart__chose-subcategory-input chose__input visually-hidden' value=";
+											echo "'$value[0]'";
+											echo "><p class='redact-cart__chose-subcategory-id visually-hidden'>";
+											echo $value[1];
+											echo "</p></label>";
+										};
+									?>
+								</div>
+							</div>
+							<p class="redact-cart__chose-subcategory-discript-two"></p>
+							<button class="redact-cart__submit-two button submit-button">Добавить</button>
+							<p class="submit-status"></p>
+							<p class="sql-status">
+								<?php
+									print_r($errorConnect);
+								?>
+							</p>
+						</form>
+
+					</div>
+				</li>
+
+				<li class="cart-redact__item redact-item">
 					<button class="cart-redact__title admin-subbutton">Удалить товар</button>
+					<div class="cart-redact__remove-cart">
+						<form action="PHP/clientData.php" method="post" enctype="multipart/form-data" class="remove-cart__form admin-form">
+							<input type="text" class="remove-cart__name admin-input" placeholder="Код товара" name="remove-cart__code">
+							<button class="remove-cart__submit button submit-button">Удалить</button>
+							<p class="submit-status"></p>
+							<p class="sql-status">
+								<?php
+									print_r($errorConnect);
+								?>
+							</p>
+						</form>
+					</div>
 				</li>
 
 			</ul>
@@ -301,12 +419,79 @@
 				</li>
 
 				<li class="menu-redact__item redact-item">
+					<button class="menu-reduct__title admin-subbutton">Изменить категорию</button>
+					<div class="menu-redact__redact-category">
+
+						<form action="PHP/clientData.php" method="post" enctype="multipart/form-data" class="redact-category__form admin-form">
+							<div class="redact-category__chose chose-wrapper">
+								<button class="redact-category__chose-button chose__button">Выбрать</button>
+								<div class="chose__label-wrapper">
+									<?php
+										foreach ($delCategoryResult as $value) {
+											echo "<label class='redact-category__chose-label chose__label'>";
+											echo $value[0];
+											echo "<input type='radio' name='redact-category'
+											class='redact-category__chose-input chose__input visually-hidden' value=";
+											echo "'$value[0]'>";
+											echo "</label>";
+										};
+									?>
+								</div>
+							</div>
+							<button class="redact-category__submit button submit-button">Изменить</button>
+							<p class="submit-status"></p>
+							<p class="sql-status">
+							</p>
+						</form>
+
+						<form action="PHP/clientData.php" method="post" enctype="multipart/form-data" class="redact-category__form-two admin-form visually-hidden">
+							<div class="redact-category__name-wrapper">
+								<input type="text" class="redact-category__name admin-input" placeholder="Название" name="redact-category__name">
+								<div class="redact-category__spot">
+									<div class="redact-category__spot-left"></div>
+									<label class="redact-category__spot-label">
+										<div class="redact-category__label-info"></div>
+										<input type="number" class="redact-category__spot-input visually-hidden" name="redact-category__spot">
+									</label>
+									<div class="redact-category__spot-right"></div>
+								</div>
+							</div>
+							<input type="text" class="redact-category__subscribe admin-input" placeholder="Описание" name="redact-category__subscribe">
+							<div class="redact-category__foto admin-upload">
+								<p class="redact-category__foto-name">Фото категории</p>
+								<label class="redact-category__foto-label input-choise"> Выбрать<input type="file" class="redact-category__foto-input visually-hidden upload-input" name="redact-category__foto"></label>
+								<p class="admin-upload__subscribe"></p>
+								<p class="admin-upload__invalid"></p>
+							</div>
+							<div class="redact-subcategory__wrapper">
+								<p class="redact-subcategory__title">Подкатегории</p>
+
+								<div class="redact-subcategory__item">
+									<input type="text" class="redact-subcategory__input admin-input" placeholder="Название" name="redact-subcategory__name-1">
+									<div class="redact-subcategory__plus"></div>
+									<div class="redact-subcategory__minus"></div>
+								</div>
+								
+							</div>
+							<button class="redact-category__submit button submit-button">Изменить</button>
+							<p class="submit-status"></p>
+							<p class="sql-status">
+								<?php
+									print_r($errorConnect);
+								?>
+							</p>
+						</form>
+
+					</div>
+				</li>
+
+				<li class="menu-redact__item redact-item">
 					<button class="menu-reduct__title admin-subbutton">Удалить категорию</button>
 					<div class="menu-redact__remove-category">
 						<form action="PHP/clientData.php" method="post" enctype="multipart/form-data" class="remove-category__form admin-form">
 							<div class="remove-category__chose chose-wrapper">
 								<button class="remove-category__chose-button chose__button">Выбрать</button>
-								<div class="chose__label-wrapper">
+								<div class="chose__label-wrapper-del">
 									<?php
 										foreach ($delCategoryResult as $value) {
 											print '<label class="remove-category__chose-label chose__label">' . $value[0] . '<input type="checkbox" name=' . $value[1] . ' class="remove-category__chose-input chose__input visually-hidden"></label>';
@@ -328,13 +513,6 @@
 
 		<section class="title-page-redact admin-section">
 			<button class="title-page-redact__button admin-button">Редактирование титульной страницы</button>
-			<form action="" class="cart-redact__form">
-				<div class="qwerty"></div>
-			</form>
-		</section>
-
-		<section class="user-redact admin-section">
-			<button class="user-redact__button admin-button">Работа с пользователями</button>
 			<form action="" class="cart-redact__form">
 				<div class="qwerty"></div>
 			</form>
@@ -374,6 +552,6 @@
 	<script src="js/sistem.js"></script>
 	<script src="js/server.js"></script>
 	<script src="js/admin.js"></script>
-
+	<script src="js/checkCookie.js"></script>
 </body>
 </html>
