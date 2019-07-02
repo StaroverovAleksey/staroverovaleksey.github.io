@@ -3,8 +3,8 @@ const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Fri
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
 window.model =  {
-	URL_TIMEZONES: 'http://worldtimeapi.org/api/timezone',
-	URL_TIME: 'http://worldtimeapi.org/api/timezone/',
+	URL_TIMEZONES: 'https://worldtimeapi.org/api/timezone',
+	URL_TIME: 'https://worldtimeapi.org/api/timezone/',
 
 	error: false,
 	formatToggle: 24,
