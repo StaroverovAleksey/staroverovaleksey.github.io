@@ -44,34 +44,18 @@ window.controller = {
 	},
 
 	deliteSection: () => {
-		let children = [];
-		children = [...document.querySelector('.date').children];
-		for(let val of children) {
-			val.remove();
-		};
-		children = [...document.querySelector('.settings-block').children];
-		for(let val of children) {
-			val.remove();
-		};
-		children = [...document.querySelector('.time').children];
-		for(let val of children) {
-			val.remove();
-		};
-		children = [...document.querySelector('.about').children];
-		for(let val of children) {
-			val.remove();
+		for(section of document.querySelectorAll('.global-container')) {
+			section.innerHTML = null;
 		};
 	},
 
 	renderDigit: () => {
+		window.controller.deliteSection();
 		if(this.digitClock) {
 			clearInterval(this.digitClock.rotateTimerId);
 		};
-		
-		window.controller.deliteSection();
 		if(this.analogClock) {
-			clearInterval(this.analogClock.rotateTimerId);
-			
+			clearInterval(this.analogClock.rotateTimerId);	
 		};
 		
 		window.model.getTime()
@@ -91,14 +75,13 @@ window.controller = {
 	},
 
 	renderAnalog: () => {
+		window.controller.deliteSection();
+
 		if(this.analogClock) {
 			clearInterval(this.analogClock.rotateTimerId);
 		};
-		
-		window.controller.deliteSection();
 		if(this.digitClock) {
-			clearInterval(this.digitClock.rotateTimerId);
-			
+			clearInterval(this.digitClock.rotateTimerId);	
 		};
 		
 		window.model.getTime()

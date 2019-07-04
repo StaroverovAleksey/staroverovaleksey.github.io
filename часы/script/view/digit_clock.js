@@ -73,17 +73,11 @@ class Digit_clock {
 	}
 
 	render(container) {
-		let children = [];
-		children = [...container.children]
-		for(let val of children) {
-			val.remove();
-		};
 		container.insertAdjacentHTML('beforeEnd', this.template);
 		if(window.model.formatToggle === 12) {
 			container.insertAdjacentHTML('beforeEnd', this.formatTemplate);
 		};
 		this.element = container;
-		//this.rotate();
 	}
 };
 
