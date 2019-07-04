@@ -96,6 +96,7 @@ body {
 .time__item {
 	display: inline-block;
 	margin: 0;
+	margin-bottom: 50px;
 }
 
 .noon {
@@ -106,7 +107,7 @@ body {
 }
 
 .date__item {
-	margin-top: 50px;
+	margin: 0;
 	margin-bottom: 0px;
 	display: inline-block;
 	font-size: 26px;
@@ -170,6 +171,11 @@ body {
 		margin-left: 16px;
 		font-size: 40px;
 	}
+
+	.date__day {
+		margin-top: 10px;
+		display: inline-block;
+	}
 }
 
 @media(min-width: 1000px) {
@@ -191,11 +197,12 @@ body {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
-	width: 360px;
-	height: 360px;
+	width: 280px;
+	height: 280px;
 	border: 3px solid white;
 	border-radius: 50%;
 	margin: 0 auto;
+	margin-bottom: 20px;
 	-webkit-box-pack: center;
 	    -ms-flex-pack: center;
 	        justify-content: center;
@@ -241,27 +248,27 @@ body {
 
 .title__point {
 	position: relative;
-	left: 159px;
-	width: 16px;
-	height: 16px;
+	left: 120px;
+	width: 12px;
+	height: 12px;
 	background: white;
 	border-radius: 50%;
 }
 
 .hour__point {
 	position: relative;
-	left: 163px;
-	width: 8px;
-	height: 8px;
+	left: 124px;
+	width: 6px;
+	height: 6px;
 	background: white;
 	border-radius: 50%;
 }
 
 .min__point {
 	position: relative;
-	left: 165px;
-	width: 4px;
-	height: 4px;
+	left: 125px;
+	width: 3px;
+	height: 3px;
 	background: white;
 	border-radius: 50%;
 }
@@ -629,7 +636,7 @@ body {
 
 .time__hour-arrow {
 	width: 8px;
-	height: 100px;
+	height: 80px;
 	right: calc(50% - 4px);
 	-webkit-transform-origin: bottom;
 	    -ms-transform-origin: bottom;
@@ -637,9 +644,9 @@ body {
 }
 
 .time__min-arrow {
-	width: 6px;
-	height: 130px;
-	right: calc(50% - 3px);
+	width: 4px;
+	height: 100px;
+	right: calc(50% - 2px);
 	-webkit-transform-origin: bottom;
 	    -ms-transform-origin: bottom;
 	        transform-origin: bottom;
@@ -647,7 +654,7 @@ body {
 
 .time__sec-arrow {
 	width: 2px;
-	height: 150px;
+	height: 116px;
 	right: calc(50% - 1px);
 	-webkit-transform-origin: bottom;
 	    -ms-transform-origin: bottom;
@@ -658,7 +665,53 @@ body {
 	position: relative;
 	background: red;
 	width: 2px;
-	height: 140px;
+	height: 106px;
+}
+
+.main-title--analog {
+	margin-bottom: 20px;
+}
+
+@media(min-width: 460px) {
+	.time__wrapper {
+		width: 360px;
+		height: 360px;
+	}
+
+	.title__point {
+		left: 156px;
+		width: 16px;
+		height: 16px;
+	}
+
+	.hour__point {
+		left: 160px;
+		width: 8px;
+		height: 8px;
+	}
+
+	.min__point {
+		left: 162px;
+		width: 4px;
+		height: 4px;
+	}
+
+	.time__hour-arrow {
+		height: 90px;
+	}
+
+	.time__min-arrow {
+		width: 6px;
+		height: 120px;
+	}
+
+	.time__sec-arrow {
+		height: 140px;
+	}
+
+	.sec-arrow__color-container {
+		height: 130px;
+	}
 }
 
 .settings-block {
