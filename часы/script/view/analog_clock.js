@@ -13,7 +13,7 @@ class Analog_clock {
 	}
 	
 	get template () {
-		return `<h1 class="main-title">${this.city}</h1>
+		return `<h1 class="main-title main-title--analog">${this.city}</h1>
 		<div class="time__wrapper">
 		<div class="time__center">
 			<div class="time__marks">

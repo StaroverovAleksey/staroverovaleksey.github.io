@@ -59,7 +59,7 @@ class Digit_clock {
 						this.hour++;
 						this.element.querySelector('.time__hour').textContent = '0' + this.hour;
 						if(this.hour.toString().split('').length > 1) {
-							this.element.querySelector('.time__hour').textContent = his.hour;
+							this.element.querySelector('.time__hour').textContent = this.hour;
 						};
 					} else {
 						this.hour = 0;
