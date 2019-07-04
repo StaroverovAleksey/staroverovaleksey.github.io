@@ -21,6 +21,10 @@ class Digit_clock {
 		this.sec = data.sec,
 		this.city = window.model.timezone.split('/')[window.model.timezone.split('/').length - 1].replace('_', ' ');
 	}
+
+	get formatTemplate () {
+		return `<p class="time__item noon">${this.noon}</p>`;
+	}
 	
 	get template () {
 		return `<h1 class="main-title">${this.city}</h1>
@@ -28,8 +32,7 @@ class Digit_clock {
 		<p class="time__item min__colon">:</p>
 		<p class="time__item time__min">${this.min}</p>
 		<p class="time__item sec__colon">:</p>
-		<p class="time__item time__sec">${this.sec}</p>
-		<p class="time__item noon">${this.noon}</p>`;
+		<p class="time__item time__sec">${this.sec}</p>`;
 	}
 
 	rotate() {
@@ -76,6 +79,9 @@ class Digit_clock {
 			val.remove();
 		};
 		container.insertAdjacentHTML('beforeEnd', this.template);
+		if(window.model.formatToggle === 12) {
+			container.insertAdjacentHTML('beforeEnd', this.formatTemplate);
+		};
 		this.element = container;
 		//this.rotate();
 	}
