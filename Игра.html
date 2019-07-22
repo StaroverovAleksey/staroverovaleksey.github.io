@@ -169,14 +169,23 @@
 				const step = canvas.width / (this.manesCount + 1);
 				let coordX = step;
 				ctx.textAlign = "center";
-				ctx.font = 'bold ' + (44  * window.ratio) + 'px sans-serif';
+				ctx.font = 'bold ' + (36  * window.ratio) + 'px sans-serif';
 				for(let i = 0; i < this.activeItems.length; i++) {
+					if(canvas.width > 600) {
+						var height = canvas.height - 45 * window.ratio;
+					} else {
+						if(i % 2) {
+							var height = canvas.height - 25 * window.ratio;
+						} else {
+							var height = canvas.height - 65 * window.ratio;
+						};
+					};
 					if(this.inactiveItems[i] === 'false') {
 						ctx.fillStyle = "rgba(70, 0, 0, 1)";
-						ctx.fillText(this.activeItems[i], coordX, canvas.height - 45 * window.ratio);
+						ctx.fillText(this.activeItems[i], coordX, height);
 					} else {
 						ctx.fillStyle = "rgba(70, 0, 0, 0.2)";
-						ctx.fillText(this.activeItems[i], coordX, canvas.height - 45 * window.ratio);
+						ctx.fillText(this.activeItems[i], coordX, height);
 					};
 					coordX = coordX + step;
 				};
@@ -243,8 +252,8 @@
 
 		createHiddenObjects = () => {  //Массив объектов, описывающих спрятанные предметоы.
 			let hiddenObjects = [];
-			hiddenObjects.push(new ImageItem('Parfume', document.querySelector('.parfume'), -30, 525, 660, document.querySelector('.parfumeMask'), 516, 713))
-			hiddenObjects.push(new ImageItem('Apple', document.querySelector('.apple'), 0, 565, 475));
+			hiddenObjects.push(new ImageItem('Parfume', document.querySelector('.parfume'), -30, 515, 660, document.querySelector('.parfumeMask'), 516, 713))
+			hiddenObjects.push(new ImageItem('Apple', document.querySelector('.apple'), 0, 545, 475));
 			hiddenObjects.push(new ImageItem('Ballerina', document.querySelector('.ballerina'), 0, 820, 700));
 			hiddenObjects.push(new ImageItem('Basket', document.querySelector('.basket'), 0, 10, 401, document.querySelector('.basketMask'), 30, 407));
 			hiddenObjects.push(new ImageItem('Book', document.querySelector('.book'), 0, 1165, 680, document.querySelector('.bookMask'), 1155, 724));
@@ -266,16 +275,30 @@
 					wieportObject.push(i);
 				};
 			};
-			
 
 			let activeObject = [];  //Из предыдущего массива выбираем 4 предмета, которые будут активны в игре.
-			for(let i of wieportObject) {
+			activeObject.push(wieportObject[Math.floor(Math.random() * wieportObject.length)]);
+			/*for(let i of wieportObject) {
 				if(activeObject.length < 4) {
 					const random = Math.floor(Math.random() * wieportObject.length);
 					activeObject.push(wieportObject[random]);
 					wieportObject.splice(random, 1);
 				};
+			};*/
+			while(activeObject.length < 4) {
+				let trigger = true;
+				const random = Math.floor(Math.random() * wieportObject.length);
+				for(let i of activeObject) {
+					if(i === wieportObject[random]) {
+						trigger = false;
+					};
+					
+				};
+				if(trigger) {
+						activeObject.push(wieportObject[random]);
+					};
 			};
+			console.log(activeObject);
 			window.activeObject = activeObject;
 		};
 
@@ -299,11 +322,8 @@
 				if(dist <= radius) {  //Срабатывает, если клик попал в "область клика" объекта.
 					bottomTable.inactiveItems[i] = 'active';  //"Зачеркиваем" имя активированного объекта на нижней табличке.
 					for(let j = 0; j < window.hiddenObjects.length; j++) {
-						//console.log(j);
-						//console.log(window.activeObject[i])
 						if(window.hiddenObjects[j].name === window.activeObject[i].name) {
 							window.hiddenObjects.splice(j, 1);
-							console.log(window.hiddenObjects);
 						};
 					};
 					resizeHeandler();
